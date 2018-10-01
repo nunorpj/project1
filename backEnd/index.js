@@ -103,16 +103,20 @@ jwt.verify(req.token,'secretkey',{expiresIn:'1h'} ,(err,authData)=>{
 
 
 //TODO:isto vai ser um get p ir buscar os postes
-app.post('/api/posts',verifyToken, (req,res)=>{
+app.get('/api/todos/:id',verifyToken, (req,res)=>{
 
     jwt.verify(req.token,'secretkey',{expiresIn:'1h'} ,(err,authData)=>{
         if(err){
             res.sendStatus(403);
         }else{
-            res.json({
-                message:'Post created...',
-                authData
-            })
+            
+            Todo.find({owner:req.params.id}).then(todos=>{
+                //o user pode ainda nao ter criado nenhum todo
+                console.log(todos);
+                res.send(todos);
+            }).catch(err=>{
+                res.status(404).send('COULDNT GET TODOS BECAUSE.....' + err)
+            });
         }
     })
 })
