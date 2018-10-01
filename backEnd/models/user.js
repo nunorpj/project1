@@ -16,6 +16,10 @@ const UserSchema = new Schema({
         type:String,
         required:true,
         minlength:6,
+    },
+    notifications:{
+        type:Boolean,
+        default: false,
     }
 
 

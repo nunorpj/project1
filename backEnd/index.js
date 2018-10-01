@@ -3,6 +3,7 @@ const mongoose = require('mongoose')
 const app = express();
 const jwt = require('jsonwebtoken')
 const User = require('./models/user');
+const Todo = require('./models/todo')
 const bodyParser = require('body-parser');
 
 app.use(bodyParser.json());
@@ -16,8 +17,6 @@ mongoose.connection
         console.log(`could not connect`, err);
     });
 
-
-
 app.get('/api',(req,res)=>{
     res.json({
         message:'Welcome to the API'
@@ -25,6 +24,8 @@ app.get('/api',(req,res)=>{
 });
 
 
+//as notificaçoes vao ser desligas por default
+//se o mail ja existir devolve erro
 app.post('/api/registry',(req,res)=>{
     console.log('aqui')
     const newUser = new User({
@@ -37,7 +38,6 @@ app.post('/api/registry',(req,res)=>{
         console.log('new user saved!')
         res.send('User saved!')
     }).catch(err=>{
-
         res.status(404).send('USER NOT SAVE BECAUSE.....' + err)
     });
 });
@@ -64,6 +64,45 @@ app.post('/api/login',(req,res)=>{
         })
 })
 
+//TODO: inserir todo
+app.post('/api/insert/:id',verifyToken,(req,res)=>{ 
+jwt.verify(req.token,'secretkey',{expiresIn:'1h'} ,(err,authData)=>{
+    if(err){
+        res.sendStatus(403);
+    }else{
+        //Data do todo criado ou data p fazer o todo?
+        
+        if(req.body.text && req.body.date){
+
+            var newTodo = new Todo({
+                owner: req.params.id,
+                text: req.body.text,
+                date: new Date(req.body.date),
+            })
+
+
+
+            newTodo.save().then(todoUser=>{
+
+                console.log('new todo saved!')
+                res.json({
+                    message:'TODO created...',
+                    authData
+                })            
+            }).catch(err=>{
+                res.status(404).send('TODO NOT SAVE BECAUSE.....' + err)
+            });
+
+
+        }else{
+            res.send("missing info")
+        }
+    }
+})
+})
+
+
+//TODO:isto vai ser um get p ir buscar os postes
 app.post('/api/posts',verifyToken, (req,res)=>{
 
     jwt.verify(req.token,'secretkey',{expiresIn:'1h'} ,(err,authData)=>{
@@ -86,8 +125,6 @@ app.listen(9999,(err)=>{
 
 //FORMAT OF TOKEN
 // Authorization: Bearer <access_token>
-
-
 
 function verifyToken(req,res,next){
     //get auth header value
