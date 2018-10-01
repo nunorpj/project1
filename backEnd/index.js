@@ -43,33 +43,25 @@ app.post('/api/registry',(req,res)=>{
 });
 
 app.post('/api/login',(req,res)=>{
-    //mock user
-    
-
-    User.find({
+    User.findOne({
             email: req.body.email,
             password: req.body.password
-        }, (err,result)=>{
-            if(result == 'undefined'){
-                res.send("incorrect log in")
-            }else{
-                console.log(result.email + " logedIn")
-
-
-            }
-        })
-    
-  /**
-               jwt.sign({result},'secretkey',(err,token)=>{
+        }).then(user=>{
+            if(user){
+                console.log(user)
+                jwt.sign({user},'secretkey',(err,token)=>{
                     res.json({
+                        message : "loged in",
                         token
                     });
                 });
-   */
-    
+            }else{
+                res.json({
+                    message: "error"
+                })
+            }
 
-  
-
+        })
 })
 
 app.post('/api/posts',verifyToken, (req,res)=>{
