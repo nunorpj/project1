@@ -1,0 +1,21 @@
+<md-toolbar>
+    <div class="md-toolbar-tools">
+      <h2 flex md-truncate class="userIcon">Dashboard</h2>
+      <md-button class="md-fab md-mini md-hue-3" >
+        <md-icon md-svg-icon="img/icons/favorite.svg"></md-icon>
+      </md-button>
+    </div>
+  </md-toolbar>
+
+
+  <div class="dashboard" ng-controller="mainCtrl">
+    
+    <md-button class="md-primary md-raised addbtn" ng-click="showAdvanced($event)">
+          Add TODO
+        </md-button>
+
+          <todo></todo>
+          <todo></todo>
+
+
+    </div>

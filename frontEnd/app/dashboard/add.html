@@ -1,0 +1,41 @@
+<md-dialog aria-label="Mango (Fruit)">
+        <form ng-cloak>
+          <md-toolbar>
+            <div class="md-toolbar-tools">
+              <h2>Add TODO</h2>
+              <span flex></span>
+              <md-button class="md-icon-button" ng-click="cancel()">
+                <md-icon md-svg-src="img/icons/ic_close_24px.svg" aria-label="Close dialog"></md-icon>
+              </md-button>
+            </div>
+          </md-toolbar>
+      
+          <md-dialog-content style="display: flex; flex-direction: column">
+    
+            
+              <div style="display: flex; flex-wrap: wrap" >
+                  <label style="margin:10px"> 
+                    Todo:</label>
+                  <input type="text" style="margin:10px; width:40vh;">
+              </div>
+                <div  style="display: flex">
+                    <label style="margin:10px"> Done by:</label>
+                    <input type="date">
+                </div>
+
+
+            
+          </md-dialog-content>
+      
+          <md-dialog-actions layout="row">
+
+            <md-button ng-click="answer('not useful')" style="background: green">
+             Add
+            </md-button>
+            <md-button ng-click="answer('useful')" style="background: red">
+              Cancel
+            </md-button>
+          </md-dialog-actions>
+        </form>
+
+      </md-dialog>
