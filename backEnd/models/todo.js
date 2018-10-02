@@ -16,7 +16,15 @@ const TodoSchema = new Schema({
     date:{
         type: Date,
         required: true,
+    },
+    goalDate:{
+        type: Date,
+    },
+    done:{
+        type: Boolean,
+        default:false,
     }
+
 })
 
 module.exports = mongoose.model('todos',TodoSchema);

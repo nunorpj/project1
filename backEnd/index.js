@@ -23,6 +23,67 @@ app.get('/api',(req,res)=>{
     });
 });
 
+app.delete('/api/delete/:id',verifyToken,(req,res)=>{
+    jwt.verify(req.token,'secretkey',{expiresIn:'1h'} ,(err,authData)=>{
+        if(err){
+            res.sendStatus(403);
+        }else{
+            Todo.findOne({_id: req.params.id})
+            .then(todo=>{
+                todo.remove().then(todoRemoved=>{
+                    res.send('Todo removed ' + todoRemoved)
+                });
+        
+            })
+
+        }
+    })
+})
+ 
+
+
+
+app.put('/api/edit/:id',verifyToken,(req,res)=>{
+
+    Todo.findOne(
+        {_id: req.params.id}
+    )
+    .then(todo=>{
+
+        todo.text = req.body.text ? req.body.text : todo.text ;
+        todo.owner = req.body.owner ? req.body.owner : todo.owner ;
+        todo.goalDate = req.body.goalDate ? req.body.goalDate : todo.goalDate ;
+        todo.done = req.body.done ? req.body.done : todo.done ;
+
+
+        todo.save().then(todoSaved=>{
+
+            res.send(todoSaved);
+        }).catch(err=>console.log(err))
+    })
+})
+
+
+
+
+app.put('/api/notifications/:id',verifyToken,(req,res)=>{
+
+    User.findOne(
+        {_id: req.params.id}
+    )
+    .then(user=>{
+
+        
+        user.notifications = req.body.notifications;
+
+        user.save().then(userSaved=>{
+
+            res.send(userSaved);
+        }).catch(err=>console.log(err))
+    })
+})
+
+
 
 //as notificaçoes vao ser desligas por default
 //se o mail ja existir devolve erro
@@ -64,7 +125,6 @@ app.post('/api/login',(req,res)=>{
         })
 })
 
-//TODO: inserir todo
 app.post('/api/insert/:id',verifyToken,(req,res)=>{ 
 jwt.verify(req.token,'secretkey',{expiresIn:'1h'} ,(err,authData)=>{
     if(err){
@@ -74,10 +134,12 @@ jwt.verify(req.token,'secretkey',{expiresIn:'1h'} ,(err,authData)=>{
         
         if(req.body.text && req.body.date){
 
+            
             var newTodo = new Todo({
                 owner: req.params.id,
                 text: req.body.text,
                 date: new Date(req.body.date),
+                goalDate: !req.body.goalDate ? null : new Date(req.body.goalDate) ,
             })
 
 
@@ -102,7 +164,7 @@ jwt.verify(req.token,'secretkey',{expiresIn:'1h'} ,(err,authData)=>{
 })
 
 
-//TODO:isto vai ser um get p ir buscar os postes
+
 app.get('/api/todos/:id',verifyToken, (req,res)=>{
 
     jwt.verify(req.token,'secretkey',{expiresIn:'1h'} ,(err,authData)=>{
