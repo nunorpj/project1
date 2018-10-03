@@ -1,0 +1,71 @@
+
+<md-toolbar  layout-align="center center">
+    <h1>Welcome to Todo's App</h1>
+
+  </md-toolbar>
+  
+  <md-content  flex layout="row"      layout-align="center center" ng-controller='homeCtrl'>
+      
+    
+      <div ng-cloak flex="40" flex-gt-md="30"  > 
+
+                  <md-content class="container" >
+                    <md-tabs md-dynamic-height md-border-bottom>
+                      <md-tab label="Log In">
+                        <md-content class="md-padding"  >
+                              <form action="">
+                                      <div  layout="column">
+                                        <md-input-container>
+                                          <label>Email</label>
+                                          <input ng-model="user.email" type="email" required>
+                                        </md-input-container>
+                                        <md-input-container>
+
+                                        <label>Password</label>
+                                        <input ng-model="user.password" type="password" required>
+                                      </md-input-container>
+
+                                        <md-button class="md-raised md-primary"
+                                         style="background: #4CAF50"
+                                         ng-click="login(user.email,user.password)"
+                                         >Login</md-button>
+                                        
+                                      </div>
+                                  </form>
+                      </md-content>
+                      </md-tab>
+                      <md-tab label="SigIn">
+                        <md-content class="md-padding">
+                              <form action="a">
+                                <div layout="column">
+                                  <md-input-container>
+                                    <label>Email</label>
+                                    <input ng-model="user.email" type="email" required>
+                                  </md-input-container>
+                                  <md-input-container>
+
+                                  <label>Password</label>
+                                  <input ng-model="user.password" type="password" required>
+                                </md-input-container>
+
+                                  <md-button class="md-raised md-primary"type="submit" style="background: #4CAF50">SingIn</md-button>
+                                  
+                                </div>
+                          </form>
+                      </md-content>
+                      </md-tab>
+                    </md-tabs>
+                  </md-content>
+                </div>
+              </div>
+          </div>
+  
+          <div class="space">
+  
+        </div>
+      
+    
+  
+
+  </md-content>
+  

@@ -1,0 +1,24 @@
+<md-toolbar>
+    <div class="md-toolbar-tools">
+      <h2 flex md-truncate class="userIcon">Dashboard</h2>
+      <label>{{globals.currentUser.user.email}}</label>
+      <md-button class="md-fab md-mini md-hue-3" aria-label=" ">
+        <md-icon ></md-icon>
+      </md-button>
+    </div>
+  </md-toolbar>
+
+
+  <div ng-controller="mainCtrl" flex 
+  layout="column"       layout-align="center center"
+
+  >
+    
+    <md-button class="md-primary md-raised addbtn" ng-click="showAdvanced($event)">
+          Add TODO
+        </md-button>
+
+
+          <todo></todo>
+
+    </div>

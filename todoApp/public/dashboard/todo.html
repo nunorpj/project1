@@ -1,0 +1,22 @@
+
+<div layout="row" class="todoconteiner" ng-controller="todoCtrl" ng-repeat="todo in todos">
+
+  <div class="todoheader" >
+
+      <md-checkbox aria-label="Checkbox 1" ng-model="todo.done">
+        </md-checkbox>
+</div>
+  <div class="todoContent" >
+    <div class="todoContentText">
+        {{todo.text}}
+    </div>
+
+    <div class="todoContentDate">
+      {{todo.date}}
+    </div>
+  </div>
+  <div class="todoend">
+    <md-button class="md-raised md-warn"  ng-click="deleteTodo(todo,$index)" >Delete</md-button>
+  </div>
+
+</div>
