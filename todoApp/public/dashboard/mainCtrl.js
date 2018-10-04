@@ -8,10 +8,18 @@ angular.module('myApp')
       $location.path('/')
 
   todoService.getTodos(function(data){
+    console.log(data.data)
     $scope.todos=data.data;
   })
 
-
+  $scope.deleteTodo =function(data,index) {
+    todoService.deleteTodo(data,function(result){
+     //  $scope.todos.splice(index, 1);
+       todoService.getTodos(function(data){
+        $scope.todos=data.data;
+      })
+    })
+}
 
 
 
@@ -31,8 +39,9 @@ angular.module('myApp')
         console.log("no data")
       else{
         todoService.addTodo(data,function(result){
-          //VER ISTO
-        $scope.todos.push(data);
+        console.log(result.data.t[0])
+        if(result.data.t[0])
+          $scope.todos.push(result.data.t[0]);
       })
       }
     }, function() {
@@ -49,9 +58,9 @@ angular.module('myApp')
       $mdDialog.cancel();
     };
 
-    $scope.add = function(text,date) {
+    $scope.add = function(text,goalDate) {
 
-      $mdDialog.hide({text,date});
+      $mdDialog.hide({text,goalDate});
     };
   }
 });

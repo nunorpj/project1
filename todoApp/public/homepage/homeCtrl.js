@@ -1,6 +1,7 @@
-angular.module('myApp').controller('homeCtrl', function($scope,autenticationService,$location) {
+angular.module('myApp').controller('homeCtrl',
+ function($scope,autenticationService,$location) {
    
-   
+   $scope.logError = false;
     autenticationService.ClearCredentials();
 
     $scope.login=function(email,pass){
@@ -11,9 +12,9 @@ angular.module('myApp').controller('homeCtrl', function($scope,autenticationServ
                 $location.path('/dashboard')
                 autenticationService.SetCredentials(response.data);
             }else{
-                console.log("ERROR")
 
+                alert("Invalid login");
             }
         })
     }
-});
+})

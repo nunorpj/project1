@@ -12,31 +12,8 @@
                   <md-content class="container" >
                     <md-tabs md-dynamic-height md-border-bottom>
                       <md-tab label="Log In">
-                        <md-content class="md-padding"  >
-                              <form action="">
-                                      <div  layout="column">
-                                        <md-input-container>
-                                          <label>Email</label>
-                                          <input ng-model="user.email" type="email" required>
-                                        </md-input-container>
-                                        <md-input-container>
-
-                                        <label>Password</label>
-                                        <input ng-model="user.password" type="password" required>
-                                      </md-input-container>
-
-                                        <md-button class="md-raised md-primary"
-                                         style="background: #4CAF50"
-                                         ng-click="login(user.email,user.password)"
-                                         >Login</md-button>
-                                        
-                                      </div>
-                                  </form>
-                      </md-content>
-                      </md-tab>
-                      <md-tab label="SigIn">
-                        <md-content class="md-padding">
-                              <form action="a">
+                          <md-content class="md-padding">
+                              <form action="#" onsubmit=login(user.email,user.password)>
                                 <div layout="column">
                                   <md-input-container>
                                     <label>Email</label>
@@ -46,6 +23,44 @@
 
                                   <label>Password</label>
                                   <input ng-model="user.password" type="password" required>
+                                
+                                </md-input-container>
+
+                                  
+
+                                  <md-button class="md-raised md-primary" 
+                                  style="background: #4CAF50"
+                                   ng-click="login(user.email,user.password)"
+                                   
+                                   type="submit"
+                                   
+                                   >Login</md-button>
+
+                                </div>
+                          </form>
+                      </md-content>
+                      </md-tab>
+                      <md-tab label="SigIn">
+                        <md-content class="md-padding">
+                              <form action="#">
+                                <div layout="column">
+                                  <md-input-container>
+                                    <label>Email</label>
+                                    <input ng-model="user.email" type="email" required>
+
+                                  </md-input-container>
+
+                                  <md-input-container>
+
+                                  <label>Name</label>
+                                  <input ng-model="user.name" type="text" required>
+                                </md-input-container>
+
+                                  <md-input-container>
+
+                                  <label>Password</label>
+                                  <input ng-model="user.password" type="password" required>
+
                                 </md-input-container>
 
                                   <md-button class="md-raised md-primary"type="submit" style="background: #4CAF50">SingIn</md-button>
@@ -69,3 +84,5 @@
 
   </md-content>
   
+
+

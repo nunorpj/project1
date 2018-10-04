@@ -5,6 +5,7 @@ const jwt = require('jsonwebtoken')
 const User = require('./models/user');
 const Todo = require('./models/todo')
 const bodyParser = require('body-parser');
+var nodemailer = require('nodemailer');
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
@@ -20,6 +21,8 @@ mongoose.connection
     });
 
 app.get('/api',(req,res)=>{
+    
+
     res.json({
         message:'Welcome to the API'
     });
@@ -27,9 +30,14 @@ app.get('/api',(req,res)=>{
 
 app.delete('/api/delete/:id',verifyToken,(req,res)=>{
     jwt.verify(req.token,'secretkey',{expiresIn:'1h'} ,(err,authData)=>{
+        console.log("teste")
+        console.log(authData)
         if(err){
+            console.log(err +"\n "+ req.params.id)
             res.sendStatus(403);
         }else{
+            console.log("recebi o id:\n "+ req.params.id)
+
             Todo.findOne({_id: req.params.id})
             .then(todo=>{
                 todo.remove().then(todoRemoved=>{
@@ -65,9 +73,6 @@ app.put('/api/edit/:id',verifyToken,(req,res)=>{
     })
 })
 
-
-
-
 app.put('/api/notifications/:id',verifyToken,(req,res)=>{
 
     User.findOne(
@@ -84,8 +89,6 @@ app.put('/api/notifications/:id',verifyToken,(req,res)=>{
         }).catch(err=>console.log(err))
     })
 })
-
-
 
 //as notificaçoes vao ser desligas por default
 //se o mail ja existir devolve erro
@@ -111,8 +114,9 @@ app.post('/api/login',(req,res)=>{
             password: req.body.password
         }).then(user=>{
             if(user){
-                console.log(user)
-                jwt.sign({user},'secretkey',(err,token)=>{
+                var playload = user._id;
+                jwt.sign({playload},'secretkey',(err,token)=>{
+                    console.log(err)
                     res.json({
                         message : "loged in",
                         token,
@@ -147,13 +151,18 @@ jwt.verify(req.token,'secretkey',{expiresIn:'1h'} ,(err,authData)=>{
 
 
 
-            newTodo.save().then(todoUser=>{
+            newTodo.save().then(todo=>{
 
                 console.log('new todo saved!')
-                res.json({
-                    message:'TODO created...',
-                    authData
-                })            
+
+                Todo.find(todo).then(t=>{
+                
+                    res.send({
+                        message:'TODO created...',
+                        t
+                    })  
+                
+                })
             }).catch(err=>{
                 res.status(404).send('TODO NOT SAVE BECAUSE.....' + err)
             });
@@ -175,8 +184,7 @@ app.get('/api/todos/:id',verifyToken, (req,res)=>{
             res.sendStatus(403);
         }else{
             
-            Todo.find({owner:req.params.id}).then(todos=>{
-                //o user pode ainda nao ter criado nenhum todo
+            Todo.find({owner:authData.playload}).then(todos=>{
                 res.send(todos);
             }).catch(err=>{
                 res.status(404).send('COULDNT GET TODOS BECAUSE.....' + err)
@@ -214,6 +222,7 @@ function verifyToken(req,res,next){
         res.sendStatus(403);
     }
 }
+
 
 
 

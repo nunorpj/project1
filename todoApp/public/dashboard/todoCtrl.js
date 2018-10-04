@@ -3,12 +3,13 @@
 angular.module('myApp')
 .controller('todoCtrl', function($scope,todoService) {
  
-    $scope.deleteTodo =function(data,index) {
-        todoService.deleteTodo(data,function(result){
-            console.log(result)
-            $scope.todos.splice(index, 1);
 
+
+    $scope.editTodo = function(data){
+        todoService.editTodo(data,function(result){
+            console.log(result)
         })
     }
+
 
 });

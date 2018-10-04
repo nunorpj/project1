@@ -13,12 +13,25 @@
   layout="column"       layout-align="center center"
 
   >
-    
-    <md-button class="md-primary md-raised addbtn" ng-click="showAdvanced($event)">
+   <div layout="row"  ng-show="todos.length>0"
+   layout-align="space-between center" 
+   style="width: 70%; border-bottom: powderblue solid 3px" >
+     
+      <md-button class="md-primary md-raised addbtn" ng-click="showAdvanced($event)">
           Add TODO
-        </md-button>
+        </md-button >
+        <input type="text" placeholder="Search" ng-model="search" style="width: 30%; margin-right:10px ">
+  </div> 
 
+  <md-button class="md-primary md-raised addbtn" ng-click="showAdvanced($event)" ng-hide="todos.length>0">
+      Add TODO
+    </md-button >
 
-          <todo></todo>
+    <hr>
+
+      <todo 
+      ng-repeat="todo in todos | orderBy: ['done','goalDate'] | filter : search"
+      
+      ></todo>
 
     </div>

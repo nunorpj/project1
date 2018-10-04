@@ -1,22 +1,56 @@
 
-<div layout="row" class="todoconteiner" ng-controller="todoCtrl" ng-repeat="todo in todos">
+<div style=" box-shadow:2px 2px 3px 4px #ccc;"
+ layout="row" class="todoconteiner" ng-controller="todoCtrl" 
+ 
+ >
 
   <div class="todoheader" >
 
-      <md-checkbox aria-label="Checkbox 1" ng-model="todo.done">
-        </md-checkbox>
+      <input type="checkbox" ng-model="todo.done" ng-change="editing=false" />
+
 </div>
   <div class="todoContent" >
-    <div class="todoContentText">
-        {{todo.text}}
+
+
+    <div class="todoContentText" ng-class="{strike : todo.done}"
+    >
+        <span ng-hide="editing">{{todo.text}}</span>
+        <input 
+        ng-show="editing"
+         type="text" 
+         ng-model="todo.text" 
+         />
+
     </div>
 
     <div class="todoContentDate">
-      {{todo.date}}
+        <span ng-hide="editing"
+        ng-if="todo.goalDate" ng-class="{strike : todo.done}">
+          {{todo.goalDate | date : format : timezone}}
+        </span>
+        <span ng-hide="editing"
+        ng-if="!todo.goalDate" ng-class="{strike : todo.done}">
+          No define date
+      </span>    
+        
+        <md-datepicker 
+        ng-show="editing"
+        ng-model="todo.goalDate" 
+        md-placeholder="todo.goalDate"
+        ></md-datepicker>
+
     </div>
   </div>
-  <div class="todoend">
-    <md-button class="md-raised md-warn"  ng-click="deleteTodo(todo,$index)" >Delete</md-button>
+  <div class="todoend" layout="column">
+    <md-button class="md-raised md-warn"  ng-click="editing=true" 
+    ng-hide="editing || todo.done " style="width: 40% ;background: orange; border-radius:20px" 
+    
+    >Edit</md-button>
+    
+    
+    <md-button class="md-raised md-warn"  ng-click="editing=false ;editTodo(todo)" ng-show="editing" style="width: 40% ;background: limegreen; border-radius:20px">Save</md-button>
+    <md-button class="md-raised md-warn"  ng-click="deleteTodo(todo,$index)" style="width: 40% ; background: red; border-radius:20px ">Delete</md-button>
+
   </div>
 
 </div>
