@@ -1,0 +1,146 @@
+input[type=text],
+input[type=password] {
+  width: 100%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  box-sizing: border-box;
+}
+
+button {
+  background-color: #4CAF50;
+  color: white;
+  padding: 14px 20px;
+  margin: 8px 0;
+  border: none;
+  cursor: pointer;
+  width: 100%;
+}
+
+
+.container {
+  border: 1px solid cornflowerblue;
+  padding: 15px;
+  border-radius: 20px;
+}
+
+
+
+.todoconteiner {
+  box-shadow:2px 2px 3px 4px #ccc;
+  width: 70%;
+  height: 100px;
+  margin-bottom: 5px;
+  border: steelblue solid 1px;
+  border-radius: 10px;
+
+}
+
+
+
+
+input[type=checkbox] {
+
+  transform: scale(2);
+  padding: 10px;
+}
+
+
+
+.todoContentText {
+
+  border-bottom: black solid 1px;
+  border-radius: 1px;
+}
+
+.todoContentDate {
+  padding-left: 10px;
+  color: red;
+}
+
+.dialogdemoBasicUsage #popupContainer {
+  position: relative;
+}
+
+.dialogdemoBasicUsage .footer {
+  width: 100%;
+  text-align: center;
+  margin-left: 20px;
+}
+
+.dialogdemoBasicUsage .footer,
+.dialogdemoBasicUsage .footer>code {
+  font-size: 0.8em;
+  margin-top: 50px;
+}
+
+.dialogdemoBasicUsage button {
+  width: 200px;
+}
+
+.dialogdemoBasicUsage div#status {
+  color: #c60008;
+}
+
+.dialogdemoBasicUsage .dialog-demo-prerendered md-checkbox {
+  margin-bottom: 0;
+}
+
+.addbtn {
+  width: 100px;
+}
+
+.strike {
+  text-decoration: line-through;
+}
+
+
+
+
+@media screen and (max-width: 600px) {
+
+  input[type=checkbox] {
+
+    transform: scale(1.5);
+    padding: 5px;
+  }
+
+  #searchInput{
+
+    transform: scale(0.9);
+    margin-left: 3%;
+  }
+
+  h1{
+    font-size: 100%;
+  }
+
+  .todoconteiner{
+    width: 96%;
+    font: 50%;
+  }
+  
+  .header{
+    width: 96% !important;
+  }
+
+
+}  
+
+.header{
+  width: 70%; 
+  border-bottom: powderblue solid 3px;
+  
+
+}
+
+
+md-toast {
+  left: calc(50vw - 150px);
+}
+
+
+md-toast.md-success-toast-theme .md-toast-content {
+  background-color: green;
+}

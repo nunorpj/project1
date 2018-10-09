@@ -1,0 +1,33 @@
+  <md-toolbar ng-controller="mainCtrl">
+    <div class="md-toolbar-tools">
+      <h2 flex md-truncate class="userIcon">Dashboard</h2>
+      <label>{{globals.currentUser.user}}</label>
+      <md-button class="md-fab md-mini md-hue-3" aria-label=" " ng-click="showConfigs($event)">
+        <md-icon md-svg-src="img/icon.svg"></md-icon>
+      </md-button>
+    </div>
+  </md-toolbar>
+
+
+  <div ng-controller="mainCtrl" flex layout="column" layout-align="center center" >
+
+    <div layout-gt-sm="row" layout-xs	="column" layout-align-xs="center center"   class="header" ng-show="todos.length>0"  layout-align="space-between center">
+
+      <md-button class="md-primary md-raised addbtn" ng-click="showAdvanced($event)">
+        Add TODO
+      </md-button>
+      <input id="searchInput"  type="text" placeholder="Search" ng-model="search" flex-gt-md="30" style=" margin-right:10px">
+    </div>
+
+
+    <md-button class="md-primary md-raised addbtn" ng-click="showAdvanced($event)" ng-hide="todos.length>0">
+      Add TODO
+    </md-button>
+
+    <hr>
+
+    <todo ng-repeat="todo in todos | orderBy: ['done','goalDate'] | filter : search"></todo>
+
+  </div>
+
+

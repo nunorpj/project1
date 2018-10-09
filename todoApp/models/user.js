@@ -20,6 +20,12 @@ const UserSchema = new Schema({
     notifications:{
         type:Boolean,
         default: false,
+    },
+
+    name:{
+        type:String,
+        required: true,
+        minlength:1,
     }
 
 

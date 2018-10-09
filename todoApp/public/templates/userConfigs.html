@@ -1,0 +1,63 @@
+<md-dialog aria-label="userConf"  flex-gt-md="20" flex="90">
+    <form ng-cloak action="" flex ng-submit="save(user)">
+        <md-toolbar>
+            <div class="md-toolbar-tools">
+                <h2>User Configurations</h2>
+                <span flex></span>
+                <md-button class="md-icon-button" ng-click="cancel()">
+                    <md-icon md-svg-src="img/cancel.svg"></md-icon>
+                </md-button>
+            </div>
+        </md-toolbar>
+
+        <md-dialog-content layout="row" layout-align="center center" flex>
+            <div layout="column" flex="90" layout-align="stretch stretch">
+
+                <md-input-container style="margin-top: 20px">
+                    <label>Name</label>
+                    <input ng-model="user.name" type="text" required ng-minlength="4" >
+                    <div ng-messages="registryForm.$error">
+                        <div ng-message="required">Name is required</div>
+                        <div ng-message="minlength">Name must be at least 4 characters.</div>
+                    </div>
+                </md-input-container>
+
+                <md-input-container style="margin-top: -15px">
+                    <label>Email</label>
+                    <input ng-model="user.email" type="email" required>
+                    <div ng-messages="registryForm.$error">
+                        <div ng-message="required">Email address is required</div>
+                    </div>
+                </md-input-container>
+
+                <md-input-container style="margin-top: -15px">
+                    <label>New password</label>
+                    <input ng-model="user.password" type="password"  ng-model="user.password" ng-minlength="6">
+                    <div ng-messages="registryForm.$error">
+                        <div ng-message="required">Name is required</div>
+                        <div ng-message="minlength">Password must be at least 4 characters.</div>
+                    </div>
+                </md-input-container>
+
+
+                <md-input-container style="margin-top: -35px">
+                        <md-switch md-invert class="md-primary" name="special" ng-model="user.notifications">
+                          Enable notifications: 
+                        </md-switch>
+                      </md-input-container>
+            </div>
+
+        </md-dialog-content>
+
+        <md-dialog-actions layout="row" style="margin-top: -15px">
+
+            <md-button type="submit"  style="background: green" class="md-raised md-warn">
+                Save
+            </md-button>
+            <md-button ng-click="cancel()" style="background: red" class="md-raised md-warn">
+                Cancel
+            </md-button>
+        </md-dialog-actions>
+    </form>
+
+</md-dialog>

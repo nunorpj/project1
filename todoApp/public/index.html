@@ -11,13 +11,14 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="bower_components/html5-boilerplate/dist/css/normalize.css">
   <link rel="stylesheet" href="bower_components/html5-boilerplate/dist/css/main.css">
-  <link rel="stylesheet" href="app.css">
+  <link rel="stylesheet" href="styles/app.css">
   <link rel="stylesheet" href="/bower_components/angular-material/angular-material.css">
 
   <script src="bower_components/html5-boilerplate/dist/js/vendor/modernizr-2.8.3.min.js"></script>
 </head>
 <body layout>
 
+ 
   
   <div ng-view  layout="column"  layout-fill ></div>
 
@@ -28,15 +29,16 @@
   <script src="/bower_components/angular-messages/angular-messages.js"></script>
   <script src="/bower_components/angular-material/angular-material.js"></script>
   
-  <script src="app.js"></script>
+  <script src="scripts/app.js"></script>
   
-  <script src="homepage/homeCtrl.js"></script>
-  <script src="homepage/autiticationService.js"></script>
+  <script src="scripts/controllers/homeCtrl.js"></script>
+  <script src="scripts/services/autiticationService.js"></script>
 
-  <script src="dashboard/mainCtrl.js"></script>
-  <script src="dashboard/todo.js"></script>
-  <script src="dashboard/todoCtrl.js"></script>
-  <script src="dashboard/todoService.js"></script>
+  <script src="scripts/controllers/mainCtrl.js"></script>
+  <script src="scripts/directives/todo.js"></script>
+  <script src="scripts/controllers/todoCtrl.js"></script>
+  <script src="scripts/services/todoService.js"></script>
+  <script src="scripts/services/configService.js"></script>
 
 
 </body>

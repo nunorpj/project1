@@ -1,0 +1,21 @@
+'use strict';
+
+// Declare app level module which depends on views, and components
+angular.module('myApp', [
+  'ngRoute',
+  'ngMaterial', 'ngMessages'
+]).
+config(['$locationProvider', '$routeProvider', function($locationProvider, $routeProvider) {
+  $routeProvider.when("/dashboard",{
+    templateUrl: "templates/dashboard.html"
+  })
+  .when("/",{
+    templateUrl: "templates/home.html"
+  })
+  .otherwise({ redirectTo: '/'});
+
+  
+}])
+.run(function($rootScope){
+  $rootScope.globals ={}
+});
