@@ -162,9 +162,9 @@ app.post('/api/registry', (req, res) => {
 
     newUser.save().then(savedUser => {
 
-        res.send('User saved!')
+        res.send({sucess:'User saved!'})
     }).catch(err => {
-        res.status(404).send('USER NOT SAVE BECAUSE.....' + err)
+        res.send({err})
 
     });
 });

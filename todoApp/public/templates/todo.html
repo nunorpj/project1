@@ -8,19 +8,23 @@
   <div flex layout="column" layout-align="space-around stretch">
 
 
-    <div flex layout="column" layout-align="center start" class="todoContentText" ng-class="{strike : todo.done}">
-      <span ng-hide="editing">{{todo.text}}</span>
-      <input ng-show="editing" type="text" ng-model="todo.text" />
+    <div flex="80" layout="column" layout-align="center start" class="todoContentText" ng-class="{strike : todo.done}">
+      
+      
+      <p ng-hide="editing">{{todo.text}}</p>
+      
+      
+      <input ng-show="editing" type="text" ng-model="todo.text" maxlength="120"  />
 
     </div>
 
     <div>
-      <span ng-hide="editing" ng-if="todo.goalDate" ng-class="{strike : todo.done}" style="color:red">
+      <span ng-hide="editing" ng-if="todo.goalDate" ng-class="{strike : todo.done}" style="color:rgb(63,81,181)">
         {{todo.goalDate | date : format : timezone}}
       </span>
       
-      <span ng-hide="editing" ng-if="!todo.goalDate" ng-class="{strike : todo.done}" style="color:red">
-        No define date
+      <span ng-hide="editing" ng-if="!todo.goalDate" ng-class="{strike : todo.done}" style="color:rgb(63,81,181)">
+          Date not defined
       </span>
 
       <md-datepicker ng-show="editing" ng-model="todo.goalDate" md-placeholder="todo.goalDate"></md-datepicker>
@@ -30,10 +34,12 @@
   </div>
 
   <div ng-hide="mobile" class="todoend " layout="column" layout-align="center start">
-    <md-button class="md-raised md-warn" ng-click="editing=true" ng-hide="editing || todo.done " style="width: 40% ;background: orange; border-radius:20px">Edit</md-button>
-    <md-button class="md-raised md-warn" ng-click="editing=false ;editTodo(todo)" ng-show="editing" style="width: 40% ;background: limegreen; border-radius:20px">Save</md-button>
+    <md-button class="md-raised md-warn" ng-click="editing=true" ng-hide="editing || todo.done " 
+    style="width: 40%; background: rgb(161, 172, 233); border-radius:20px">Edit</md-button>
+    <md-button class="md-raised md-warn" ng-click="editing=false ;editTodo(todo)" ng-show="editing" 
+    style="width: 40%; background: rgb(63,81,181); border-radius:20px">Save</md-button>
     <md-button md-ripple-size="partial" class="md-raised md-warn" ng-click="deleteTodo(todo,$index)" ng-hide="editing"
-      style="width: 40% ; background: red; border-radius:20px ">Delete</md-button>
+    style="width: 40%; background:rgb(63,81,181); border-radius:20px ">Delete</md-button>
 
   </div>
 
@@ -42,21 +48,21 @@
   
      
       <md-button class="md-fab md-mini md-hue-3" aria-label=" "  ng-click="editing=true" ng-hide="editing || todo.done "
-      style="background: orange;"
+      style="background: rgb(161, 172, 233);"
       >
           <md-icon md-svg-src="img/edit.svg"></md-icon>
         </md-button>
     
 
       <md-button class="md-fab md-mini md-hue-3" aria-label=" "  ng-click="editing=false ;editTodo(todo)" ng-show="editing"
-      style="background: limegreen;"
+      style="background: rgb(63,81,181);"
       >
           <md-icon md-svg-src="img/save.svg"></md-icon>
         </md-button>
 
     
     <md-button class="md-fab md-mini md-hue-3" aria-label=" "  ng-click="deleteTodo(todo,$index)" ng-hide="editing"
-      style="background: red;"
+      style="background: rgb(63,81,181);"
       >
           <md-icon md-svg-src="img/delete.svg"></md-icon>
         </md-button>

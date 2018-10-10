@@ -1,33 +1,58 @@
-  <md-toolbar ng-controller="mainCtrl">
-    <div class="md-toolbar-tools">
-      <h2 flex md-truncate class="userIcon">Dashboard</h2>
-      <label>{{globals.currentUser.user}}</label>
-      <md-button class="md-fab md-mini md-hue-3" aria-label=" " ng-click="showConfigs($event)">
-        <md-icon md-svg-src="img/icon.svg"></md-icon>
+<md-toolbar ng-controller="mainCtrl" style="margin-bottom: 10px">
+  <div class="md-toolbar-tools">
+    <h2 flex md-truncate class="userIcon">Dashboard</h2>
+    <label style="margin-right: 5px">{{username}}</label>
+    <md-menu md-position-mode="target-right target" md-offset="0 50" style="border: white 1px solid; border-radius: 25px">
+      <md-button aria-label=" menu" class="md-icon-button" ng-click="openMenu($mdMenu, $event)" style="margin-left: -1px">
+        <md-icon md-menu-origin md-svg-icon="img/icon.svg"></md-icon>
       </md-button>
-    </div>
-  </md-toolbar>
+
+      <md-menu-content width="3">
+        <md-menu-item>
+          <md-button ng-click="showConfigs($event)">
+            <md-icon md-svg-icon="img/config.svg" md-menu-align-target></md-icon>
+            Configs
+          </md-button>
+        </md-menu-item>
+        <md-menu-divider></md-menu-divider>
+        <md-menu-item>
+          <md-button ng-click="logout()">
+            <md-icon md-svg-icon="img/logout.svg"></md-icon>
+            Logout
+          </md-button>
+        </md-menu-item>
+      </md-menu-content>
+    </md-menu>
+  </div>
+</md-toolbar>
 
 
-  <div ng-controller="mainCtrl" flex layout="column" layout-align="center center" >
+<div ng-controller="mainCtrl" flex layout="column" layout-align="center center">
 
-    <div layout-gt-sm="row" layout-xs	="column" layout-align-xs="center center"   class="header" ng-show="todos.length>0"  layout-align="space-between center">
+  <div flex-xs="25" layout-gt-sm="row" layout-xs="column" layout-align-xs="center center" class="header" ng-show="todos.length>0"
+    layout-align="space-between center" >
 
-      <md-button class="md-primary md-raised addbtn" ng-click="showAdvanced($event)">
-        Add TODO
-      </md-button>
-      <input id="searchInput"  type="text" placeholder="Search" ng-model="search" flex-gt-md="30" style=" margin-right:10px">
-    </div>
-
-
-    <md-button class="md-primary md-raised addbtn" ng-click="showAdvanced($event)" ng-hide="todos.length>0">
+    <md-button class="md-primary md-raised addbtn" ng-click="showAdvanced($event)">
       Add TODO
     </md-button>
-
-    <hr>
-
-    <todo ng-repeat="todo in todos | orderBy: ['done','goalDate'] | filter : search"></todo>
-
+    <input id="searchInput" type="text" placeholder="Search" ng-model="search" flex-gt-md="30" style=" margin-right:10px"
+    >
   </div>
 
 
+  <md-button class="md-primary md-raised addbtn" ng-click="showAdvanced($event)" ng-hide="todos.length>0">
+    Add TODO
+  </md-button>
+
+  <hr>
+
+  <div style="position: relative; position: relative;width: 100%;height: 100%;
+" ng-show="todos.length>0">
+
+    <md-content style="position: absolute; width: 100%" layout="column" layout-align="center center" >
+      <todo flex ng-repeat="todo in todos | orderBy: ['done','goalDate'] | filter : search"></todo>
+
+    </md-content>
+  </div>
+
+</div>

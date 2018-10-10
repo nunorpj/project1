@@ -1,4 +1,4 @@
-angular.module('myApp').service('autenticationService', function($http, $rootScope) {
+angular.module('myApp').service('autenticationService', function($http,$localStorage) {
 
     this.login= function(email,password,cb){
 
@@ -10,7 +10,7 @@ angular.module('myApp').service('autenticationService', function($http, $rootSco
 
     }
         
-    this.registry= function(data){
+    this.registry= function(data,cb){
         $http.post('http://localhost:9999/api/registry', data)
         .then(cb);
     }
@@ -18,18 +18,17 @@ angular.module('myApp').service('autenticationService', function($http, $rootSco
     this.SetCredentials = function(data){
         $http.defaults.headers.common['Authorization'] = 'Bearer ' + data.token;
 
-        $rootScope.globals = {
-            currentUser: {
-                user: data.user.name,
-                token: data.token,
-            }
-        }
+        $localStorage.currentUser = { 
+            user: data.user.name, 
+            token: data.token,
+        };
 
     }
 
     //para quando fizer log out
     this.ClearCredentials = function(){
-        $rootScope.globals = {};
-        $http.defaults.headers.common.Authorization = 'Bearer';
+        $http.defaults.headers.common.Authorization = '';
+        delete $localStorage.currentUser;
+
     }
 });

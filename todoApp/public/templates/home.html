@@ -3,90 +3,98 @@
 
 </md-toolbar>
 
-<md-content flex layout="row" layout-align="center center" ng-controller='homeCtrl'>
 
 
-  <div ng-cloak flex="90" flex-gt-md="30" >
 
-    <md-content class="container">
-      <md-tabs md-dynamic-height md-border-bottom>
-        <md-tab label="Log In">
-          <md-content class="md-padding">
-            <form action="#" ng-submit="login(user)" name="logForm" role="form">
-              <div layout="column">
-                <md-input-container>
-                  <label>Email</label>
-                  <input ng-model="user.email" type="email" required >
-                  <div ng-messages="logForm.$error">
-                    <div ng-message="required">Email address is required</div>
-                  </div>
-                </md-input-container>
-                <md-input-container>
-
-                  <label>Password</label>
-                  <input ng-model="user.password" type="password" required pattern=".{6,}">
-                  <div ng-messages="logForm.$error">
-                    <div ng-message="required">Password is required</div>
-                  </div>
-
-
-                </md-input-container>
-                <md-button class="md-raised md-primary" style="background: #4CAF50" type="submit">Login</md-button>
-
-              </div>
-            </form>
-          </md-content>
-        </md-tab>
-        <md-tab label="Registry">
-          <md-content class="md-padding">
-            <form action="#" ng-submit="registry(user)" name="registryForm">
-              <div layout="column">
-                <md-input-container>
-                  <label>Email</label>
-                  <input ng-model="user.email" type="email" required>
-                  <div ng-messages="registryForm.$error">
-                    <div ng-message="required">Email address is required</div>
-                  </div>
-                </md-input-container>
-
-                <md-input-container>
-                  <label>Name</label>
-                  <input ng-model="user.name" type="text" required  ng-minlength="4">
-                  <div ng-messages="registryForm.$error">
-                    <div ng-message="required">Name is required</div>
-                    <div ng-message="minlength">Name must be at least 4 characters.</div>
-
-                  </div>
-
-                </md-input-container>
-
-                <md-input-container>
-                  <label>Password</label>
-                  <input ng-model="user.password" type="password" required ng-minlength="6">
-                  <div ng-messages="registryForm.$error">
-                    <div ng-message="required">Password is required</div>
-                    <div ng-message="minlength">Password must be at least 6 characters.</div>
-
-                  </div>
-                </md-input-container>
-
-                <md-button class="md-raised md-primary" type="submit" style="background: #4CAF50">Registry</md-button>
-
-              </div>
-            </form>
-          </md-content>
-        </md-tab>
-      </md-tabs>
-    </md-content>
-  </div>
-  </div>
+<div flex layout="column" layout-align="center stretch"  ng-controller='homeCtrl'>
+  
+  <div  layout="row" layout-align="center center" ng-show="error">
+    <div flex="90" flex-gt-md="30"  class="alert alert-danger">{{error}}</div>
   </div>
 
-  <div class="space">
-
+  <div  layout="row" layout-align="center center" ng-show="success">
+    <div flex="90" flex-gt-md="30"  class="alert alert-success">{{success}}</div>
   </div>
 
+  <md-content  layout="row" layout-align="center center">
+    <div ng-cloak flex="90" flex-gt-md="30">
+      <md-content class="container">
+        <md-tabs md-dynamic-height md-border-bottom>
+          <md-tab label="Log In">
+            <md-content class="md-padding">
+              <form action="" ng-submit="login(user)" name="logForm" role="form">
+                <div layout="column">
+                  <md-input-container>
+                    <label>Email</label>
+                    <input ng-model="user.email" type="email" required>
+                    <div ng-messages="logForm.$error">
+                      <div ng-message="required">Email address is required</div>
+                    </div>
+                  </md-input-container>
+                  <md-input-container>
+
+                    <label>Password</label>
+                    <input ng-model="user.password" type="password" required pattern=".{6,}">
+                    <div ng-messages="logForm.$error">
+                      <div ng-message="required">Password is required</div>
+                    </div>
 
 
+                  </md-input-container>
+                  <md-button class="md-raised md-primary" style="background: #4CAF50" type="submit">Login</md-button>
+
+                </div>
+              </form>
+            </md-content>
+          </md-tab>
+          <md-tab label="Registry">
+            <md-content class="md-padding">
+              <form action="" ng-submit="registry(user)" name="registryForm" role="form">
+                <div layout="column">
+                  <md-input-container>
+                    <label>Email</label>
+                    <input ng-model="user.email" type="email" required>
+                    <div ng-messages="registryForm.$error">
+                      <div ng-message="required">Email address is required</div>
+                    </div>
+                  </md-input-container>
+
+                  <md-input-container style="margin-top: -2px;">
+                    <label>Name</label>
+                    <input ng-model="user.name" type="text" required ng-minlength="4">
+                    <div ng-messages="registryForm.$error">
+                      <div ng-message="required">Name is required</div>
+                      <div ng-message="minlength">Name must be at least 4 characters.</div>
+
+                    </div>
+
+                  </md-input-container>
+
+                  <md-input-container style="margin-top: -2px;">
+                    <label>Password</label>
+                    <input ng-model="user.password" type="password" required ng-minlength="6">
+                    <div ng-messages="registryForm.$error">
+                      <div ng-message="required">Password is required</div>
+                      <div ng-message="minlength">Password must be at least 6 characters.</div>
+
+                    </div>
+                  </md-input-container>
+
+                  <md-button 
+                  class="md-raised md-primary" type="submit" 
+                  style="background: #4CAF50; margin-top: -5px;"
+                  >Registry</md-button>
+
+                </div>
+              </form>
+            </md-content>
+          </md-tab>
+        </md-tabs>
+      </md-content>
+    </div>
+</div>
+</div>
 
 </md-content>
+
+</div>

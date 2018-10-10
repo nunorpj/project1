@@ -1,7 +1,25 @@
 'use strict';
 
 angular.module('myApp')
-  .controller('mainCtrl', function ($scope, $mdDialog, $rootScope, $location, todoService,$mdToast, configService) {
+  .controller('mainCtrl', function ($window, $localStorage, $scope, $mdDialog, $location, todoService, $mdToast, configService, autenticationService) {
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    $scope.username = $localStorage.currentUser.user;
+
 
     todoService.getTodos(function (data) {
       console.log(data.data)
@@ -18,14 +36,29 @@ angular.module('myApp')
     }
 
 
-    $scope.saveSucess = function() {
+    $scope.logout = function () {
+      autenticationService.ClearCredentials();
+      $location.path('/');
+    }
+
+
+    $scope.openMenu = function ($mdMenu, ev) {
+      $mdMenu.open(ev);
+    };
+
+
+
+
+
+
+    $scope.saveSucess = function () {
       $mdToast.show(
 
         $mdToast.simple()
-          .textContent('Users configs saved successfully!')
+        .textContent('Users configs saved successfully!')
         .theme('success-toast')
-          .hideDelay(3000)
-          .position('bottom')
+        .hideDelay(3000)
+        .position('bottom')
       );
     };
 
@@ -45,10 +78,11 @@ angular.module('myApp')
           else {
 
             configService.updateUser(user, response => {
-              if(response.data.name){
-                $rootScope.globals.currentUser.user = response.data.name;
+              if (response.data.name) {
+                $localStorage.currentUser.user = response.data.name;
+                $scope.username = $localStorage.currentUser.user;
                 $scope.saveSucess();
-              }else{
+              } else {
 
               }
               /////////
@@ -114,9 +148,12 @@ angular.module('myApp')
         $mdDialog.cancel();
       };
 
-      $scope.add = function(text,goalDate) {
+      $scope.add = function (text, goalDate) {
 
-        $mdDialog.hide({text,goalDate});
+        $mdDialog.hide({
+          text,
+          goalDate
+        });
       };
     }
   });

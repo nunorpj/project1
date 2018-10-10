@@ -45,14 +45,17 @@ input[type=checkbox] {
   transform: scale(2);
   padding: 10px;
 }
-
+.todoContentText::-webkit-scrollbar { 
+  display: none; 
+}
 
 
 .todoContentText {
-
   border-bottom: black solid 1px;
   border-radius: 1px;
+  overflow-y: scroll;
 }
+
 
 .todoContentDate {
   padding-left: 10px;
@@ -131,7 +134,7 @@ input[type=checkbox] {
 .header{
   width: 70%; 
   border-bottom: powderblue solid 3px;
-  
+
 
 }
 
@@ -144,3 +147,28 @@ md-toast {
 md-toast.md-success-toast-theme .md-toast-content {
   background-color: green;
 }
+
+.alert-success{
+  color:  #4c9c37;
+  background-color: #d7f1da;
+  border-color: #63cc71;
+  
+}
+
+.alert-danger {
+  color: #a94442;
+  background-color: #f2dede;
+  border-color: #ebccd1;
+}
+.alert {
+  padding: 15px;
+  margin-bottom: 20px;
+  border: 1px solid transparent;
+  border-radius: 10px;
+}
+
+.menudemoBasicUsage .md-menu-demo {
+  padding: 24px; }
+
+.menudemoBasicUsage .menu-demo-container {
+  min-height: 200px; }
