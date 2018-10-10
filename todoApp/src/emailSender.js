@@ -14,17 +14,18 @@ mongoose.connection
     });
 
 const transporter = nodemailer.createTransport({
-    host: 'smtp.ethereal.email',
-    port: 587,
-    secure: false, // true for 465, false for other ports
+    service: 'gmail',
     auth: {
-        user: 'yczme5ce6jdjuhmb@ethereal.email', // generated ethereal user
-        pass: 'F8jdp4GPtXUFGR36u4' // generated ethereal password
+       // user: 'yczme5ce6jdjuhmb@ethereal.email', // generated ethereal user
+      //  pass: 'F8jdp4GPtXUFGR36u4' // generated ethereal password
+      user: 'nunomailer@gmail.com',
+      pass: 'nunorafael'
+       
     }
 });
 
 
-var j = schedule.scheduleJob('43 17 * * *', function () {
+var j = schedule.scheduleJob('00 08 * * *', function () {
     console.log("It's 8 am, let's send some emails boys");
 
 
@@ -46,9 +47,10 @@ var j = schedule.scheduleJob('43 17 * * *', function () {
                 })
 
                 var itensToSendString = 'Bom dia hoje tem programado:\n';
-
+                var itensToSendStringHtml ='Bom dia hoje tem programado:' +'<br>'
                 itensToSend.forEach(item=>{
                     itensToSendString = itensToSendString +"-"+ item +';\n';
+                    itensToSendStringHtml = itensToSendStringHtml + "-" + item +';<br>'
                 })
 
                 if (itensToSend.length > 0) {
@@ -57,15 +59,15 @@ var j = schedule.scheduleJob('43 17 * * *', function () {
                         to: user.email, // list of receivers
                         subject: 'Tasks for today ✔', // Subject line
                         text: itensToSendString, // plain text body
-                        html: '<b>' + itensToSendString + '</b>' // html body
+                        html: itensToSendStringHtml // html body
                     };
 
                     transporter.sendMail(mailOptions, (error, info) => {
                         if (error) {
                             return console.log(error);
                         }
-                        console.log('Message sent: %s', info.messageId);
-                        console.log('Preview URL: %s', nodemailer.getTestMessageUrl(info));
+                       // console.log('Message sent: %s', info.messageId);
+                      //  console.log('Preview URL: %s', nodemailer.getTestMessageUrl(info));
 
 
                     });
