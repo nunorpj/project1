@@ -3,10 +3,6 @@
 angular.module('myApp')
   .controller('mainCtrl', function ($scope, $mdDialog, $rootScope, $location, todoService,$mdToast, configService) {
 
-
-    if ($rootScope.globals.currentUser == undefined)
-      $location.path('/')
-
     todoService.getTodos(function (data) {
       console.log(data.data)
       $scope.todos = data.data;

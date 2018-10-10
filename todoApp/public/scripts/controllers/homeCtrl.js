@@ -3,6 +3,7 @@ angular.module('myApp').controller('homeCtrl',
 
         $scope.logError = false;
         autenticationService.ClearCredentials();
+        console.log($scope.logError)
 
         $scope.login = function (user) {
             autenticationService.login(user.email, user.password, function (response) {
@@ -11,8 +12,9 @@ angular.module('myApp').controller('homeCtrl',
                     $location.path('/dashboard')
                     autenticationService.SetCredentials(response.data);
                 } else {
-
-                    alert("Invalid login");
+                    $scope.logError = true;
+                    $scope.saveSucess();
+                    console.log($scope.logError)
                 }
             })
         }
@@ -23,4 +25,15 @@ angular.module('myApp').controller('homeCtrl',
             })
         }
 
+
+
+        $scope.saveSucess = function() {
+            $mdToast.show(
+              $mdToast.simple()
+                .textContent('Users configs saved successfully!')
+              .theme('success-toast')
+                .hideDelay(3000)
+                .position('bottom')
+            );
+          };
     })

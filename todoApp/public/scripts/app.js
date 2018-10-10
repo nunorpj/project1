@@ -16,6 +16,15 @@ config(['$locationProvider', '$routeProvider', function($locationProvider, $rout
 
   
 }])
-.run(function($rootScope){
-  $rootScope.globals ={}
+.run(function($rootScope,$location){
+
+
+  $rootScope.$on('$locationChangeStart', function (event, next, current) {
+    // redirect to login page if not logged in
+    if ($location.path() !== '/' && $rootScope.globals.currentUser == undefined) {
+        $location.path('/');
+    }
 });
+  
+});
+
