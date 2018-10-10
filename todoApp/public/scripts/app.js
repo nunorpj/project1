@@ -2,18 +2,26 @@
 
 // Declare app level module which depends on views, and components
 angular.module('myApp', [
-  'ngRoute', 'ngMaterial', 'ngMessages', 'ngStorage'
+  , 'ngMaterial', 'ngMessages', 'ngStorage','ui.router'
 ]).
-config(['$locationProvider', '$routeProvider', function($locationProvider, $routeProvider) {
-  $routeProvider.when("/dashboard",{
-    templateUrl: "templates/dashboard.html"
-  })
-  .when("/",{
+config(['$stateProvider', function($stateProvider) {
+ 
+ 
+  var home = {
+    name: 'home',
+    url: '/',
     templateUrl: "templates/home.html"
-  })
-  .otherwise({ redirectTo: '/'});
+  }
+  var dashboard = {
+    name: 'dashboard',
+    url: '/dashboard',
+    templateUrl: "templates/dashboard.html"
+  }
+ 
+  $stateProvider.state(home);
+  $stateProvider.state(dashboard);
+ 
 
-  
 }])
 .run(function($rootScope, $http, $location, $localStorage){
 

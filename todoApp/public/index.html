@@ -19,9 +19,11 @@
 <body layout>
 
  
-  
-  <div ng-view  layout="column"  layout-fill ></div>
+  <ui-view layout="column"  layout-fill></ui-view>
 
+  <!--
+  <div ng-view  layout="column"  layout-fill ></div>
+-->
   <script src="bower_components/angular/angular.js"></script>
   <script src="bower_components/angular-route/angular-route.js"></script>
   <script src="/bower_components/angular-aria/angular-aria.js"></script>
@@ -29,8 +31,7 @@
   <script src="/bower_components/angular-messages/angular-messages.js"></script>
   <script src="/bower_components/angular-material/angular-material.js"></script>
   <script src="/bower_components/ngstorage/ngStorage.min.js"></script>
-
-
+  <script src="/bower_components/angular-ui-router/release/angular-ui-router.js"></script>
 
   <script src="scripts/app.js"></script>
   
