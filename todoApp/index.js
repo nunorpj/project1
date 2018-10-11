@@ -5,6 +5,8 @@ const jwt = require('jsonwebtoken')
 const User = require('./models/user');
 const Todo = require('./models/todo')
 const bodyParser = require('body-parser');
+require('dotenv').config()
+
 require('./src/emailSender');
 
 
@@ -15,7 +17,7 @@ app.use(bodyParser.urlencoded({
 app.use(express.static(__dirname + '/public'));
 
 
-mongoose.connect('mongodb://localhost:27017/TODOApp', {
+mongoose.connect(process.env.MONGOOSE, {
     useNewUrlParser: true
 });
 mongoose.connection
@@ -34,7 +36,7 @@ app.get('/api', (req, res) => {
 //ver este
 
 app.delete('/api/delete/:id', verifyToken, (req, res) => {
-    jwt.verify(req.token, 'secretkey', {
+    jwt.verify(req.token, process.env.SECRETKEY, {
         expiresIn: '1h'
     }, (err, authData) => {
         if (err) {
@@ -58,7 +60,7 @@ app.delete('/api/delete/:id', verifyToken, (req, res) => {
 
 
 app.put('/api/edit', verifyToken, (req, res) => {
-    jwt.verify(req.token, 'secretkey', {
+    jwt.verify(req.token, process.env.SECRETKEY, {
         expiresIn: '1h'
     }, (err, authData) => {
         if (err) {
@@ -86,7 +88,7 @@ app.put('/api/edit', verifyToken, (req, res) => {
 
 app.get('/api/user', verifyToken, (req, res) => {
 
-    jwt.verify(req.token, 'secretkey', {
+    jwt.verify(req.token, process.env.SECRETKEY, {
         expiresIn: '1h'
     }, (err, authData) => {
         if (err) {
@@ -100,7 +102,8 @@ app.get('/api/user', verifyToken, (req, res) => {
                 let userInfo ={
                     email : user.email,
                     name : user.name,
-                    notifications : user.notifications
+                    notifications : user.notifications,
+                    sendingHour: user.sendingHour
                 }
                 res.send(userInfo);
             }).catch(err => {
@@ -112,7 +115,7 @@ app.get('/api/user', verifyToken, (req, res) => {
 
 app.put('/api/user', verifyToken, (req, res) => {
 
-    jwt.verify(req.token, 'secretkey', {
+    jwt.verify(req.token, process.env.SECRETKEY, {
         expiresIn: '1h'
     }, (err, authData) => {
         if (err) {
@@ -131,9 +134,16 @@ app.put('/api/user', verifyToken, (req, res) => {
                 user.name = req.body.name ? req.body.name : user.name;
                 user.email = req.body.email ? req.body.email : user.email;
                 user.password = req.body.password ? req.body.password : user.password;
+                user.sendingHour = req.body.sendingHour ? req.body.sendingHour : user.sendingHour;
 
-                if(user.notifications!=undefined)
+
+                if(req.body.notifications!=undefined)
                     user.notifications = req.body.notifications;
+                
+                if(user.sendingHour!=undefined)
+                    user.sendingHour = req.body.sendingHour;
+
+
 
                 user.save().then(userSaved => {
                     res.send({name: userSaved.name});
@@ -196,7 +206,7 @@ app.post('/api/login', (req, res) => {
 })
 
 app.post('/api/insert', verifyToken, (req, res) => {
-    jwt.verify(req.token, 'secretkey', {
+    jwt.verify(req.token, process.env.SECRETKEY, {
         expiresIn: '1h'
     }, (err, authData) => {
         if (err) {
@@ -244,7 +254,7 @@ app.post('/api/insert', verifyToken, (req, res) => {
 
 app.get('/api/todos', verifyToken, (req, res) => {
 
-    jwt.verify(req.token, 'secretkey', {
+    jwt.verify(req.token, process.env.SECRETKEY, {
         expiresIn: '1h'
     }, (err, authData) => {
         if (err) {
@@ -262,9 +272,9 @@ app.get('/api/todos', verifyToken, (req, res) => {
     })
 })
 
-app.listen(9999, (err) => {
+app.listen(process.env.PORT, (err) => {
 
-    console.log('Runing on port 9999')
+    console.log('Runing on port '+ process.env.PORT)
 })
 
 

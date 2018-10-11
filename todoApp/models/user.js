@@ -26,6 +26,13 @@ const UserSchema = new Schema({
         type:String,
         required: true,
         minlength:1,
+    },
+    sendingHour:{
+        type:Number,
+        min: 00,
+        max: 23,
+        default: 00
+        
     }
 
 

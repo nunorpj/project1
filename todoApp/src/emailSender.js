@@ -3,8 +3,9 @@ var schedule = require('node-schedule');
 const mongoose = require('mongoose')
 const User = require('../models/user');
 const Todo = require('../models/todo')
+const moment = require('moment');
 
-mongoose.connect('mongodb://localhost:27017/TODOApp', {
+mongoose.connect(process.env.MONGOOSE, {
     useNewUrlParser: true
 });
 mongoose.connection
@@ -25,12 +26,13 @@ const transporter = nodemailer.createTransport({
 });
 
 
-var j = schedule.scheduleJob('00 08 * * *', function () {
-    console.log("It's 8 am, let's send some emails boys");
+var j = schedule.scheduleJob('00 * * * *', function () {
 
+    var time = moment().format("H");
 
     var users = User.find({
-        notifications: true
+        notifications: true,
+        sendingHour: time
     }).then(users => {
         users.forEach(user => {
             var todos = Todo.find({
@@ -66,8 +68,6 @@ var j = schedule.scheduleJob('00 08 * * *', function () {
                         if (error) {
                             return console.log(error);
                         }
-                       // console.log('Message sent: %s', info.messageId);
-                      //  console.log('Preview URL: %s', nodemailer.getTestMessageUrl(info));
 
 
                     });

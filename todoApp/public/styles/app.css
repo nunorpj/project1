@@ -57,10 +57,7 @@ input[type=checkbox] {
 }
 
 
-.todoContentDate {
-  padding-left: 10px;
-  color: red;
-}
+
 
 .dialogdemoBasicUsage #popupContainer {
   position: relative;
@@ -82,9 +79,7 @@ input[type=checkbox] {
   width: 200px;
 }
 
-.dialogdemoBasicUsage div#status {
-  color: #c60008;
-}
+
 
 .dialogdemoBasicUsage .dialog-demo-prerendered md-checkbox {
   margin-bottom: 0;
@@ -145,7 +140,7 @@ md-toast {
 
 
 md-toast.md-success-toast-theme .md-toast-content {
-  background-color: green;
+  background-color: rgb(63,81,181);
 }
 
 .alert-success{

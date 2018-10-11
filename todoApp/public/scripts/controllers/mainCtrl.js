@@ -1,22 +1,9 @@
 'use strict';
 
 angular.module('myApp')
-  .controller('mainCtrl', function ($window, $localStorage, $scope, $mdDialog, $location, todoService, $mdToast, configService, autenticationService) {
+  .controller('mainCtrl', function ($localStorage, $scope, $mdDialog, $location, todoService, $mdToast, configService, autenticationService) {
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+     
 
     $scope.username = $localStorage.currentUser.user;
 
@@ -94,6 +81,7 @@ angular.module('myApp')
     };
 
     function configController($scope, $mdDialog) {
+      
 
       configService.getUser(response => {
         $scope.user = response.data;

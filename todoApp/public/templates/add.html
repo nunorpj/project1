@@ -1,4 +1,4 @@
-<md-dialog aria-label="Add TODO" flex-gt-md="25" flex="90">
+<md-dialog aria-label="Add TODO" flex-gt-md="25" flex="90" flex-sm="50" flex-md="40">
   <form ng-cloak action="">
     <md-toolbar>
       <div class="md-toolbar-tools">
@@ -10,14 +10,16 @@
       </div>
     </md-toolbar>
 
-    <md-dialog-content style="display: flex; flex-direction: column">
+    <md-dialog-content layout="column" layout-align="center center">  
 
 
-      <div style="display: flex; flex-wrap: wrap">
+      <md-input-container  style="width: 92%; margin-top:30px">
         <label style="margin:10px">
           Todo:</label>
-        <input type="text" style="margin:10px; width:40vh;" ng-model="text" required>
-      </div>
+        <input type="text"  ng-model="text" required>
+      </md-input-container>
+
+
       <div style="display: flex">
         <label style="margin:10px"> Done by:</label>
         <md-datepicker ng-model="date" md-placeholder="Enter date"></md-datepicker>
