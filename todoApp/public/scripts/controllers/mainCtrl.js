@@ -38,11 +38,11 @@ angular.module('myApp')
 
 
 
-    $scope.saveSucess = function () {
+    $scope.saveSucess = function (msg) {
       $mdToast.show(
 
         $mdToast.simple()
-        .textContent('Users configs saved successfully!')
+        .textContent(msg)
         .theme('success-toast')
         .hideDelay(3000)
         .position('bottom')
@@ -68,8 +68,12 @@ angular.module('myApp')
               if (response.data.name) {
                 $localStorage.currentUser.user = response.data.name;
                 $scope.username = $localStorage.currentUser.user;
-                $scope.saveSucess();
+                $scope.saveSucess('Users configs saved successfully!');
               } else {
+
+                $scope.saveSucess('Error, that email was already in use!');
+
+
 
               }
               /////////

@@ -32,10 +32,10 @@
 
                 <md-input-container style="margin-top: -15px">
                     <label>New password</label>
-                    <input ng-model="user.password" type="password" ng-model="user.password" ng-minlength="6">
+                    <input ng-model="user.password" type="password" ng-model="user.password" ng-minlength="6" pattern=".{6,}" > 
                     <div ng-messages="registryForm.$error">
-                        <div ng-message="required">Name is required</div>
-                        <div ng-message="minlength">Password must be at least 4 characters.</div>
+                        <div ng-message="required">Password is required</div>
+                        <div ng-message="minlength">Password must be at least 6 characters.</div>
                     </div>
                 </md-input-container>
 

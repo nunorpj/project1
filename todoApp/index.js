@@ -124,12 +124,7 @@ app.put('/api/user', verifyToken, (req, res) => {
 
             User.findOne({
                 _id: authData.playload
-            }).then(user => {
-                console.log("req.body");
-
-                console.log(req.body);
-
-                
+            }).then(user => {          
 
                 user.name = req.body.name ? req.body.name : user.name;
                 user.email = req.body.email ? req.body.email : user.email;
@@ -146,11 +141,18 @@ app.put('/api/user', verifyToken, (req, res) => {
 
 
                 user.save().then(userSaved => {
+                    console.log(userSaved)
                     res.send({name: userSaved.name});
-                })
+                }).catch(err=>{
+                    
+                    res.send('COULDNT GET TODOS BECAUSE.....' + err)
+                        
+                    }
+                )
+
 
             }).catch(err => {
-                res.status(404).send('COULDNT GET TODOS BECAUSE.....' + err)
+                res.send('COULDNT GET TODOS BECAUSE.....' + err)
             });
         }
     })
