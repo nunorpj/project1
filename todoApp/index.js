@@ -5,9 +5,22 @@ const jwt = require('jsonwebtoken')
 const User = require('./models/user');
 const Todo = require('./models/todo')
 const bodyParser = require('body-parser');
-require('dotenv').config()
+const dotenv = require('dotenv');
+
+
+const result = dotenv.config()
+ 
+if (result.error) {
+    console.log(".env file missing!")
+    process.exit()
+}
+
 
 require('./src/emailSender');
+
+
+
+
 
 
 app.use(bodyParser.json());
