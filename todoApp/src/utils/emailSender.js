@@ -1,8 +1,8 @@
 var nodemailer = require('nodemailer');
 var schedule = require('node-schedule');
 const mongoose = require('mongoose')
-const User = require('../models/user');
-const Todo = require('../models/todo')
+const User = require('../../models/user');
+const Todo = require('../../models/todo')
 const moment = require('moment');
 
 mongoose.connect(process.env.MONGOOSE, {

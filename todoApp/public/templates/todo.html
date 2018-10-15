@@ -2,7 +2,7 @@
 
   <div flex-gt-md="5" flex="10" layout="column" layout-align="center center">
 
-    <input type="checkbox" ng-model="todo.done" ng-change="editing=false" />
+    <input type="checkbox" ng-model="todo.done" ng-change="editing=false;editTodo(todo)" />
 
   </div>
   <div flex layout="column" layout-align="space-around stretch">

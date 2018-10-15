@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const Todo = require('./todo')
 const Schema = mongoose.Schema;
 
 
@@ -33,7 +34,10 @@ const UserSchema = new Schema({
         max: 23,
         default: 00
         
-    }
+    },
+    todos:[{
+        type: Schema.Types.ObjectId, ref: 'todos' 
+    }]
 
 
 });

@@ -3,7 +3,6 @@
 angular.module('myApp')
   .controller('mainCtrl', function ($localStorage, $scope, $mdDialog, $location, todoService, $mdToast, configService, autenticationService) {
 
-     
 
     $scope.username = $localStorage.currentUser.user;
 
@@ -16,6 +15,8 @@ angular.module('myApp')
     $scope.deleteTodo = function (data, index) {
       todoService.deleteTodo(data, function (result) {
         //  $scope.todos.splice(index, 1);
+        console.log(result)
+
         todoService.getTodos(function (data) {
           $scope.todos = data.data;
         })

@@ -5,13 +5,13 @@ angular.module('myApp').service('autenticationService', function($http,$localSto
         console.log(email)
         console.log(password)
 
-        $http.post('http://localhost:9999/api/login', { email: email, password: password })
+        $http.post('/api/login', { email: email, password: password })
         .then(cb);
 
     }
         
     this.registry= function(data,cb){
-        $http.post('http://localhost:9999/api/registry', data)
+        $http.post('/api/registry', data)
         .then(cb);
     }
 
