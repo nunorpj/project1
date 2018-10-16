@@ -1,18 +1,16 @@
-angular.module('myApp').service('autenticationService', function($http,$localStorage) {
+angular.module('myApp').service('autenticationService', function($http,$localStorage,httpWraperService) {
+
+
+
+
+
 
     this.login= function(email,password,cb){
-
-        console.log(email)
-        console.log(password)
-
-        $http.post(window.location.protocol + '//' + window.location.host +'/api/login', { email: email, password: password })
-        .then(cb);
-
+        httpWraperService.publicPost('/api/login',{ email: email, password: password },cb)
     }
         
     this.registry= function(data,cb){
-        $http.post(window.location.protocol + '//' + window.location.host +'/api/registry', data)
-        .then(cb);
+        httpWraperService.publicPost('/api/registry',data,cb)
     }
 
     this.SetCredentials = function(data){
