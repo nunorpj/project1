@@ -1,11 +1,10 @@
-angular.module('myApp').service('todoService', function($http) {
+angular.module('myApp').service('todoService', function($http,httpWraperService) {
 
     this.getTodos=function(cb){
 
-
-        console.log(window)
-        $http.get(window.location.protocol + '//' + window.location.host +'/api/todos/')
-        .then(cb);
+        httpWraperService.privateGet('/api/todos/',cb);
+       // $http.get(window.location.protocol + '//' + window.location.host +'/api/todos/')
+       // .then(cb);
 
     }
 

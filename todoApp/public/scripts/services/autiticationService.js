@@ -14,7 +14,7 @@ angular.module('myApp').service('autenticationService', function($http,$localSto
     }
 
     this.SetCredentials = function(data){
-        $http.defaults.headers.common['Authorization'] = 'Bearer ' + data.token;
+      //  $http.defaults.headers.common['Authorization'] = 'Bearer ' + data.token;
 
         $localStorage.currentUser = { 
             user: data.user.name, 

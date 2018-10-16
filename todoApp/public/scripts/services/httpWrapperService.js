@@ -1,4 +1,4 @@
-angular.module('myApp').service('httpWraperService', function($http) {
+angular.module('myApp').service('httpWraperService', function($http,$localStorage) {
 
     //Default Params
     this.protocol = window.location.protocol;
@@ -17,7 +17,17 @@ angular.module('myApp').service('httpWraperService', function($http) {
 
     this.publicPost= function(path,data,cb){
         let url = this.protocol + '//' + this.host + path; 
-        $http.post(path,data).then(cb)
+        $http.post(url,data).then(cb)
     }
+
+
+
+    this.privateGet = function(path,cb){
+        let header = { headers: {'Authorization': 'Bearer ' + $localStorage.currentUser.token}}       
+        let url = this.protocol + '//' + this.host + path; 
+        $http.get(url,header).then(cb);
+    }
+
+
 
 });
