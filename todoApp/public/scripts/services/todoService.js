@@ -1,7 +1,10 @@
 angular.module('myApp').service('todoService', function($http) {
 
     this.getTodos=function(cb){
-        $http.get('/api/todos/')
+
+
+        console.log(window)
+        $http.get(window.location.protocol + '//' + window.location.host +'/api/todos/')
         .then(cb);
 
     }
@@ -9,20 +12,20 @@ angular.module('myApp').service('todoService', function($http) {
     this.addTodo=function(data,cb){
        data.date = new Date();
 
-            $http.post('/api/insert/',data)
+            $http.post(window.location.protocol + '//' + window.location.host +'/api/insert/',data)
         .then(cb);
 
     }
 
     this.deleteTodo =function(data,cb){
 
-        $http.delete('/api/delete/'+data._id)
+        $http.delete(window.location.protocol + '//' + window.location.host +'/api/delete/'+data._id)
     .then(cb);
     }
 
     this.editTodo = function(data,cb){
 
-        $http.put('/api/edit/',data)
+        $http.put(window.location.protocol + '//' + window.location.host +'/api/edit/',data)
         .then(cb);
     }
 })

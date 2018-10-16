@@ -44,10 +44,10 @@ app.use(express.static(__dirname + "/public"));
 
 
 
+
 app.listen(process.env.PORT, err => {
     console.log("Runing on port " + process.env.PORT);
 });
 
 
 
-//https.createServer(app).listen(process.env.PORT);
