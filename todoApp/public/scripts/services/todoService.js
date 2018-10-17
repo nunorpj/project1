@@ -11,20 +11,19 @@ angular.module('myApp').service('todoService', function($http,httpWraperService)
     this.addTodo=function(data,cb){
        data.date = new Date();
 
-            $http.post(window.location.protocol + '//' + window.location.host +'/api/insert/',data)
-        .then(cb);
+            httpWraperService.privatePost('/api/insert/',data,cb);
 
     }
 
     this.deleteTodo =function(data,cb){
 
-        $http.delete(window.location.protocol + '//' + window.location.host +'/api/delete/'+data._id)
-    .then(cb);
+        httpWraperService.privateDelete('/api/delete/'+data._id, cb)
+
     }
 
     this.editTodo = function(data,cb){
 
-        $http.put(window.location.protocol + '//' + window.location.host +'/api/edit/',data)
-        .then(cb);
+        httpWraperService.privatePut('/api/edit/',data,cb)
+
     }
 })

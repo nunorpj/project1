@@ -14,7 +14,7 @@ angular.module('myApp').service('httpWraperService', function($http,$localStorag
     }
     
 
-
+    //login, registry
     this.publicPost= function(path,data,cb){
         let url = this.protocol + '//' + this.host + path; 
         $http.post(url,data).then(cb)
@@ -28,6 +28,25 @@ angular.module('myApp').service('httpWraperService', function($http,$localStorag
         $http.get(url,header).then(cb);
     }
 
+
+    this.privatePost =function(path,data,cb){
+        let header = { headers: {'Authorization': 'Bearer ' + $localStorage.currentUser.token}}       
+        let url = this.protocol + '//' + this.host + path;     
+        $http.post(url,data,header).then(cb);
+    }
+
+
+    this.privatePut = function(path,data,cb){
+        let header = { headers: {'Authorization': 'Bearer ' + $localStorage.currentUser.token}}       
+        let url = this.protocol + '//' + this.host + path;    
+        $http.put(url,data,header).then(cb);
+    }
+
+    this.privateDelete = function(path,cb){
+        let header = { headers: {'Authorization': 'Bearer ' + $localStorage.currentUser.token}}       
+        let url = this.protocol + '//' + this.host + path;    
+        $http.delete(url,header).then(cb)
+    }
 
 
 });
