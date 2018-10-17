@@ -31,7 +31,7 @@ angular.module('myApp').service('httpWraperService', function($http, $location) 
     this.privateGet = function(path,cb){
         if(!this.checkHeader()) return;
         let url = this.protocol + '//' + this.host + path; 
-        $http.get(url,this.header).then(cb);
+        $http.get(url,this.header).then(cb,this.responseError);
     }
 
 
@@ -40,7 +40,6 @@ angular.module('myApp').service('httpWraperService', function($http, $location) 
         let url = this.protocol + '//' + this.host + path;     
         $http.post(url,data,this.header).then(cb);
     }
-
 
     this.privatePut = function(path,data,cb){
         if(!this.checkHeader()) return;
@@ -54,13 +53,19 @@ angular.module('myApp').service('httpWraperService', function($http, $location) 
         $http.delete(url,this.header).then(cb)
     }
 
-
     this.checkHeader = function(){
         if(!this.header){
             $location.path('/');
             return false
         }
         return true
+    }
+
+    this.responseError = function(error){
+        if(error.status==403){
+            console.log("access forbidden" + 403)
+            $location.path('/');
+        }
     }
 
 });

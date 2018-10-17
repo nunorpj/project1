@@ -1,10 +1,5 @@
 angular.module('myApp').service('autenticationService', function($localStorage,httpWraperService) {
 
-
-
-
-
-
     this.login= function(email,password,cb){
         httpWraperService.publicPost('/api/login',{ email: email, password: password },cb)
     }
