@@ -23,12 +23,12 @@ config(['$stateProvider', function($stateProvider) {
  
 
 }])
-.run(function($rootScope, $http, $location, $localStorage){
+.run(function($rootScope, $location, $localStorage,httpWraperService){
 
         // keep user logged in after page refresh
         if ($localStorage.currentUser) {
-          $http.defaults.headers.common.Authorization = 'Bearer ' + $localStorage.currentUser.token;
-      }
+          httpWraperService.setHeader({ headers: {'Authorization': 'Bearer ' + $localStorage.currentUser.token}});
+        }
 
       // redirect to login page if not logged in and trying to access a restricted page
       $rootScope.$on('$locationChangeStart', function (event, next, current) {

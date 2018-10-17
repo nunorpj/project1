@@ -6,8 +6,8 @@ angular.module('myApp').controller('homeCtrl',
         $scope.login = function (user) {
             autenticationService.login(user.email, user.password, function (response) {
                 if (response.data.token) {
-                    $location.path('/dashboard')
                     autenticationService.SetCredentials(response.data);
+                    $location.path('/dashboard')
                 } else {
                     $scope.error="Invalid email or password!";
                     $scope.success=false;

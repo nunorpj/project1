@@ -1,8 +1,9 @@
-angular.module('myApp').service('httpWraperService', function($http,$localStorage) {
+angular.module('myApp').service('httpWraperService', function($http, $location) {
 
     //Default Params
     this.protocol = window.location.protocol;
     this.host = window.location.host;
+    this.header;  
 
 
     this.setProtocol = function(prtcl) {
@@ -11,6 +12,11 @@ angular.module('myApp').service('httpWraperService', function($http,$localStorag
 
     this.setHost = function(hst){
         this.host=hst;
+    }
+
+
+    this.setHeader = function(hdr) {
+        this.header= hdr;
     }
     
 
@@ -23,30 +29,38 @@ angular.module('myApp').service('httpWraperService', function($http,$localStorag
 
 
     this.privateGet = function(path,cb){
-        let header = { headers: {'Authorization': 'Bearer ' + $localStorage.currentUser.token}}       
+        if(!this.checkHeader()) return;
         let url = this.protocol + '//' + this.host + path; 
-        $http.get(url,header).then(cb);
+        $http.get(url,this.header).then(cb);
     }
 
 
     this.privatePost =function(path,data,cb){
-        let header = { headers: {'Authorization': 'Bearer ' + $localStorage.currentUser.token}}       
+        if(!this.checkHeader()) return;
         let url = this.protocol + '//' + this.host + path;     
-        $http.post(url,data,header).then(cb);
+        $http.post(url,data,this.header).then(cb);
     }
 
 
     this.privatePut = function(path,data,cb){
-        let header = { headers: {'Authorization': 'Bearer ' + $localStorage.currentUser.token}}       
+        if(!this.checkHeader()) return;
         let url = this.protocol + '//' + this.host + path;    
-        $http.put(url,data,header).then(cb);
+        $http.put(url,data,this.header).then(cb);
     }
 
     this.privateDelete = function(path,cb){
-        let header = { headers: {'Authorization': 'Bearer ' + $localStorage.currentUser.token}}       
+        if(!this.checkHeader()) return;
         let url = this.protocol + '//' + this.host + path;    
-        $http.delete(url,header).then(cb)
+        $http.delete(url,this.header).then(cb)
     }
 
+
+    this.checkHeader = function(){
+        if(!this.header){
+            $location.path('/');
+            return false
+        }
+        return true
+    }
 
 });

@@ -1,4 +1,4 @@
-angular.module('myApp').service('autenticationService', function($http,$localStorage,httpWraperService) {
+angular.module('myApp').service('autenticationService', function($localStorage,httpWraperService) {
 
 
 
@@ -14,18 +14,19 @@ angular.module('myApp').service('autenticationService', function($http,$localSto
     }
 
     this.SetCredentials = function(data){
-      //  $http.defaults.headers.common['Authorization'] = 'Bearer ' + data.token;
-
+     
         $localStorage.currentUser = { 
             user: data.user.name, 
             token: data.token,
         };
 
+        httpWraperService.setHeader({ headers: {'Authorization': 'Bearer ' + $localStorage.currentUser.token}});
+
+
     }
 
     //para quando fizer log out
     this.ClearCredentials = function(){
-        $http.defaults.headers.common.Authorization = '';
         delete $localStorage.currentUser;
 
     }
