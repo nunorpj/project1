@@ -38,19 +38,19 @@ angular.module('myApp').service('httpWraperService', function($http, $location) 
     this.privatePost =function(path,data,cb){
         if(!this.checkHeader()) return;
         let url = this.protocol + '//' + this.host + path;     
-        $http.post(url,data,this.header).then(cb);
+        $http.post(url,data,this.header).then(cb,this.responseError);
     }
 
     this.privatePut = function(path,data,cb){
         if(!this.checkHeader()) return;
         let url = this.protocol + '//' + this.host + path;    
-        $http.put(url,data,this.header).then(cb);
+        $http.put(url,data,this.header).then(cb,this.responseError);
     }
 
     this.privateDelete = function(path,cb){
         if(!this.checkHeader()) return;
         let url = this.protocol + '//' + this.host + path;    
-        $http.delete(url,this.header).then(cb)
+        $http.delete(url,this.header).then(cb,this.responseError)
     }
 
     this.checkHeader = function(){
