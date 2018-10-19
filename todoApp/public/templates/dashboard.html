@@ -1,10 +1,12 @@
-<md-toolbar ng-controller="mainCtrl" style="margin-bottom: 10px;" >
+<md-toolbar  ng-controller="mainCtrl" class="top" >
   <div class="md-toolbar-tools">
-    <h2 flex md-truncate class="userIcon">Dashboard</h2>
+      <span class="logo" aria-label="Sidnav">TM</span>
+
+    <h1  flex md-truncate class="topTitle">Tasks</h1>
     <label style="margin-right: 5px">{{username}}</label>
-    <md-menu md-position-mode="target-right target" md-offset="0 50" style="border: white 1px solid; border-radius: 25px">
+    <md-menu md-position-mode="target-right target" md-offset="0 50" class="menubtn">
       <md-button aria-label=" menu" class="md-icon-button" ng-click="openMenu($mdMenu, $event)" style="margin-left: -1px">
-        <md-icon md-menu-origin md-svg-icon="img/icon.svg"></md-icon>
+        <span class="bold">...</span>
       </md-button>
 
       <md-menu-content width="3">
@@ -32,17 +34,17 @@
   <div flex-xs="25" layout-gt-sm="row" layout-xs="column" layout-align-xs="center center" class="header" ng-show="todos.length>0"
     layout-align="space-between center" >
 
-    <md-button class="md-primary md-raised addbtn" ng-click="showAdvanced($event)">
-      Add TODO
-    </md-button>
+    <button class="addbtn" ng-click="showAdvanced($event)">
+      Add 
+    </button>
     <input id="searchInput" type="text" placeholder="Search" ng-model="search" flex-gt-md="30" style=" margin-right:10px"
     >
   </div>
 
 
-  <md-button class="md-primary md-raised addbtn" ng-click="showAdvanced($event)" ng-hide="todos.length>0">
-    Add TODO
-  </md-button>
+  <button class="addbtn" ng-click="showAdvanced($event)" ng-hide="todos.length>0">
+    Add 
+  </button>
 
   <hr>
 

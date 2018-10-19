@@ -17,10 +17,18 @@ config(['$stateProvider', function($stateProvider) {
     url: '/dashboard',
     templateUrl: "templates/dashboard.html"
   }
+
+  var signUp = {
+    name: 'signUp',
+    url: '/signUp',
+    templateUrl: "templates/signUp.html"
+
+  }
  
   $stateProvider.state(home);
+  $stateProvider.state(signUp);
   $stateProvider.state(dashboard);
- 
+
 
 }])
 .run(function($rootScope, $location, $localStorage,httpWraperService){
@@ -32,8 +40,10 @@ config(['$stateProvider', function($stateProvider) {
 
       // redirect to login page if not logged in and trying to access a restricted page
       $rootScope.$on('$locationChangeStart', function (event, next, current) {
-          var publicPages = ['/'];
+          var publicPages = ['/','/signUp'];
           var restrictedPage = publicPages.indexOf($location.path()) === -1;
+          console.log(restrictedPage)
+          console.log($location.path())
           if (restrictedPage && !$localStorage.currentUser) {
               $location.path('/');
           }

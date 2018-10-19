@@ -1,6 +1,6 @@
 <md-dialog aria-label="userConf" flex-gt-md="30" flex="90" flex-sm="50" flex-md="40" layout-lg="30">
     <form ng-cloak action="" flex ng-submit="save(user)">
-        <md-toolbar>
+        <md-toolbar class="topConfig">
             <div class="md-toolbar-tools">
                 <h2>User Configurations</h2>
                 <span flex></span>
@@ -59,10 +59,10 @@
 
         <md-dialog-actions layout="row" style="margin-top: -15px">
 
-            <md-button type="submit" style="background: rgb(63,81,181)" class="md-raised md-warn">
+            <md-button type="submit" style="background: #008952" class="md-raised md-warn">
                 Save
             </md-button>
-            <md-button ng-click="cancel()" style="background: rgb(161, 172, 233)" class="md-raised md-warn">
+            <md-button ng-click="cancel()" style="background: rgb(246, 52, 3)" class="md-raised md-warn">
                 Cancel
             </md-button>
         </md-dialog-actions>

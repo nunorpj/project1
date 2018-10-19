@@ -3,6 +3,15 @@ angular.module('myApp').controller('homeCtrl',
 
         autenticationService.ClearCredentials();
 
+
+        $scope.gotoSignUp = function(){
+            $location.path('signUp')
+
+        }
+        $scope.gotoLogIn= function(){
+            $location.path('/')
+        }
+
         $scope.login = function (user) {
             autenticationService.login(user.email, user.password, function (response) {
                 if (response.data.token) {
@@ -25,7 +34,9 @@ angular.module('myApp').controller('homeCtrl',
                     $scope.success=false;  
                 }else{
                     $scope.error=false;
+                    $location.path('/')
                     $scope.success="Accout created successfully!"
+
                 }
 
 

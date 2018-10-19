@@ -1,3 +1,7 @@
+
+
+
+
 input[type=text],
 input[type=password] {
   width: 100%;
@@ -28,12 +32,12 @@ button {
 
 
 .todoconteiner {
-  box-shadow:2px 2px 3px 4px #ccc;
   width: 70%;
   height: 100px;
   margin-bottom: 5px;
-  border: steelblue solid 1px;
-  border-radius: 10px;
+  border: #717274 solid 1px;
+  border-radius: 5px;
+  background: white;
 
 }
 
@@ -87,6 +91,25 @@ input[type=checkbox] {
 
 .addbtn {
   width: 100px;
+  padding: 10px;
+  font-size: 20px;
+  background: #008952;
+  color:#fff;
+  line-height: 1.2rem;
+  font-weight: 900;
+  user-select: none;
+  text-decoration: none;
+  cursor: pointer;
+  text-shadow: none;
+  border: none;
+  border-radius: .25rem;
+  box-shadow: none;
+  position: relative;
+  display: inline-block;
+  vertical-align: bottom;
+  text-align: center;
+  white-space: nowrap;
+
 }
 
 .strike {
@@ -128,7 +151,7 @@ input[type=checkbox] {
 
 .header{
   width: 70%; 
-  border-bottom: rgb(161, 172, 233)  solid 3px;
+  border-bottom: #717274  solid 3px;
 
 
 }
@@ -168,3 +191,114 @@ md-toast.md-success-toast-theme .md-toast-content {
 .menudemoBasicUsage .menu-demo-container {
   min-height: 200px; }
 
+
+
+.top{
+    background: white !important; 
+    color:#717274    !important;
+    box-shadow: 0 1px 1px rgba(0, 0, 0,0.1) !important;
+    margin-bottom: 10px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+
+}
+
+.topAddDialog{
+  background: #008952 !important; 
+  color:white    !important;
+  box-shadow: 0 1px 1px rgba(0, 0, 0,0.1) !important;
+ 
+
+}
+.topConfig{
+  background: #008952 !important; 
+  color:white    !important;
+  box-shadow: 0 1px 1px rgba(0, 0, 0,0.1) !important;
+}
+
+.logo{
+  background: #008952;
+  color:#fff;  
+  font-weight: 1000;
+  font-size: 130%;
+  padding: 10px;
+  border-radius: 30px;
+  padding-left: 10px;
+  padding-right: 10px;
+  margin-right: 8px;
+  margin-left: -10px
+
+}
+
+.background{
+  background: #f9f9f9d7;
+}
+
+.cardlog{
+  padding: 20px 100px 40px 100px;
+  margin-bottom: 20px;
+  color:#717274;
+
+}
+
+.btn-log{
+  padding: 10px;
+  font-size: 20px;
+  background: #008952;
+  color:#fff;
+  line-height: 1.2rem;
+  font-weight: 900;
+  user-select: none;
+  text-decoration: none;
+  cursor: pointer;
+  text-shadow: none;
+  border: none;
+  border-radius: .25rem;
+  box-shadow: none;
+  position: relative;
+  display: inline-block;
+  vertical-align: bottom;
+  text-align: center;
+  white-space: nowrap;
+
+}
+
+
+.loginputconteiner{
+  width: 400px;
+}
+
+
+
+
+.top-btn{
+  color:#717274;
+  font-size: 15px !important;
+  font-weight: 700 !important;
+
+}
+a{
+  color: #0576b9;
+  text-decoration: none;
+}
+
+a:hover, a.active {
+  text-decoration: underline;
+}
+
+.bold {
+  font-weight: 700!important;
+}
+
+
+
+.menubtn{
+   border-radius: 5px;
+  background:white;
+  color:#717274 !important;
+  border: 1px solid #717274;
+
+}
+.topTitle{
+  color:black
+}

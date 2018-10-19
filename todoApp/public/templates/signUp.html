@@ -1,0 +1,65 @@
+<md-toolbar class="top">
+    <div class="md-toolbar-tools">
+  
+      <span class="logo" aria-label="Sidnav">TM</span>
+  
+      <h3 >Task Manager</h3>
+  
+    </div>
+  </md-toolbar>
+  
+  
+  
+  <div flex layout="column" layout-align="center center"  ng-controller='homeCtrl' class="background">
+    
+      <div class="alert alert-danger" ng-show="error">{{error}}</div>
+
+  
+    <md-card layout="column" layout-align="center center" class="cardlog">
+      
+      <h2>Sign Up </h2>
+      <span>Sign up to your task manager</span>
+      <form layout="column" layout-align="center stretch" class="loginputconteiner" ng-submit="registry(user)" name="registryForm" role="form">
+        <md-input-container>
+           
+            <label>Email</label>
+            <input ng-model="user.email" type="email" required>
+            <div ng-messages="registryForm.$error">
+              <div ng-message="required">Email address is required</div>
+            </div>
+          </md-input-container>
+
+          <md-input-container style="margin-top: -2px;">
+            <label>Name</label>
+            <input ng-model="user.name" type="text" required ng-minlength="4">
+            <div ng-messages="registryForm.$error">
+              <div ng-message="required">Name is required</div>
+              <div ng-message="minlength">Name must be at least 4 characters.</div>
+
+            </div>
+
+          </md-input-container>
+
+          <md-input-container style="margin-top: -2px;">
+            <label>Password</label>
+            <input ng-model="user.password" type="password" required ng-minlength="6">
+            <div ng-messages="registryForm.$error">
+              <div ng-message="required">Password is required</div>
+              <div ng-message="minlength">Password must be at least 6 characters.</div>
+
+            </div>
+          </md-input-container>
+  
+  
+        <button type="submit" class="btn-log">Continue</button>
+      </form>
+  
+    </md-card>
+  
+    <md-content>
+        <span>You already have an account? <a ng-click="gotoLogIn()" class="bold">Log in here!</a></span>
+  
+    
+      </md-content>
+  
+  </div>

@@ -1,4 +1,4 @@
-angular.module('myApp').config(function($httpProvider){
+angular.module('myApp').config(function ($httpProvider) {
 
-$httpProvider.interceptors.push("httpResErrorInterceptor");
+    $httpProvider.interceptors.push("httpResErrorInterceptor");
 })

@@ -35,34 +35,31 @@
 
   <div ng-hide="mobile" class="todoend " layout="column" layout-align="center start">
     <md-button class="md-raised md-warn" ng-click="editing=true" ng-hide="editing || todo.done " 
-    style="width: 40%; background: rgb(161, 172, 233); border-radius:20px">Edit</md-button>
+    style="width: 40%; background: #007286; border-radius:5px">Edit</md-button>
     <md-button class="md-raised md-warn" ng-click="editing=false ;editTodo(todo)" ng-show="editing" 
-    style="width: 40%; background: rgb(63,81,181); border-radius:20px">Save</md-button>
+    style="width: 40%; background: #008952; border-radius:5px">Save</md-button>
     <md-button md-ripple-size="partial" class="md-raised md-warn" ng-click="deleteTodo(todo,$index)" ng-hide="editing"
-    style="width: 40%; background:rgb(63,81,181); border-radius:20px ">Delete</md-button>
+    style="width: 40%; background:rgb(246, 52, 3); border-radius:5px ">Delete</md-button>
 
   </div>
 
-
   <div ng-show="mobile" class="todoend " layout="column" layout-align="center start">
-  
-     
       <md-button class="md-fab md-mini md-hue-3" aria-label=" "  ng-click="editing=true" ng-hide="editing || todo.done "
-      style="background: rgb(161, 172, 233);"
+      style="background: #007286;;"
       >
           <md-icon md-svg-src="img/edit.svg"></md-icon>
         </md-button>
     
 
       <md-button class="md-fab md-mini md-hue-3" aria-label=" "  ng-click="editing=false ;editTodo(todo)" ng-show="editing"
-      style="background: rgb(63,81,181);"
+      style="background:#008952;"
       >
           <md-icon md-svg-src="img/save.svg"></md-icon>
         </md-button>
 
     
     <md-button class="md-fab md-mini md-hue-3" aria-label=" "  ng-click="deleteTodo(todo,$index)" ng-hide="editing"
-      style="background: rgb(63,81,181);"
+      style="background: rgb(246, 52, 3);"
       >
           <md-icon md-svg-src="img/delete.svg"></md-icon>
         </md-button>
