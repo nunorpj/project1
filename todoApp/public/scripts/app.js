@@ -49,5 +49,7 @@ config(['$stateProvider', function($stateProvider) {
           }
       });
   
-});
+}).config(['$compileProvider', function ($compileProvider) {
+  $compileProvider.debugInfoEnabled(false);
+}]);
 
