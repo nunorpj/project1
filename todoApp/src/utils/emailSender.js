@@ -5,14 +5,6 @@ const User = require('../../models/user');
 const Todo = require('../../models/todo')
 const moment = require('moment');
 
-mongoose.connect(process.env.MONGOOSE, {
-    useNewUrlParser: true
-});
-mongoose.connection
-    .once('open', () => console.log('connected emailSide'))
-    .on('error', (err) => {
-        console.log(`could not connect emailSide`, err);
-    });
 
 const transporter = nodemailer.createTransport({
     service: 'gmail',

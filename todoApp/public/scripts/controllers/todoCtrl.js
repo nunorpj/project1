@@ -3,11 +3,6 @@
 angular.module('myApp')
     .controller('todoCtrl', function ($scope, $window, todoService, $timeout) {
 
-
-
-
-
-
         var screenWidth = $window.innerWidth;
         if (screenWidth < 1200) {
             $scope.mobile = true;

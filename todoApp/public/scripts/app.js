@@ -48,8 +48,7 @@ config(['$stateProvider', function($stateProvider) {
               $location.path('/');
           }
       });
-  
 }).config(['$compileProvider', function ($compileProvider) {
-  $compileProvider.debugInfoEnabled(false);
+  $compileProvider.debugInfoEnabled(true);
 }]);
 

@@ -5,11 +5,8 @@ const bodyParser = require("body-parser");
 const dotenv = require("dotenv");
 const result = dotenv.config();
 require("./src/utils/emailSender");
-const auth = require("./src/routes/auth")
-const userData = require("./src/routes/user")
-const todoData = require("./src/routes/todo")
-const https = require('https')
-const fs = require('fs')
+require("./src/routes/routersConfi")(app);
+
 
 if (result.error) {
     console.log(".env file missing!");
@@ -28,9 +25,7 @@ mongoose.connection
         console.log(`could not connect`, err);
     });
 
-app.use("/", auth);
-app.use("/", userData)
-app.use("/", todoData)
+
 
 
 app.use(bodyParser.json());
