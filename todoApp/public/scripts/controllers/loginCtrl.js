@@ -1,9 +1,10 @@
 angular.module('myApp').controller('loginCtrl',
-    function ($scope, autenticationService, $location) {
+    function ($scope, autenticationService, $location,$rootScope) {
 
         autenticationService.ClearCredentials();
-
-
+        
+        console.log($rootScope.success)
+        
         $scope.gotoSignUp = function () {
             $location.path('signUp')
 

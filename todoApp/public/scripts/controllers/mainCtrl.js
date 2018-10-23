@@ -1,14 +1,12 @@
 'use strict';
 
 angular.module('myApp')
-  .controller('mainCtrl', function ($localStorage, $scope, $mdDialog, $location, todoService, $mdToast, configService, autenticationService) {
-
-
+  .controller('mainCtrl', function ($rootScope, $localStorage, $scope, $mdDialog, $location, todoService, $mdToast, autenticationService) {
     $scope.username = $localStorage.currentUser.user;
 
 
+
     todoService.getTodos(function (data) {
-      console.log(data.data)
       $scope.todos = data.data;
     })
 
@@ -19,6 +17,7 @@ angular.module('myApp')
 
         todoService.getTodos(function (data) {
           $scope.todos = data.data;
+
         })
       })
     }
@@ -34,17 +33,11 @@ angular.module('myApp')
       $mdMenu.open(ev);
     };
 
-
-
-
-
-
-    $scope.saveSucess = function (msg) {
+    $scope.toastShow = function (msg) {
       $mdToast.show(
 
         $mdToast.simple()
         .textContent(msg)
-        .theme('success-toast')
         .hideDelay(3000)
         .position('bottom')
       );
@@ -53,100 +46,30 @@ angular.module('myApp')
 
     $scope.showConfigs = function (ev) {
       $mdDialog.show({
-          controller: configController,
-          templateUrl: 'templates/userConfigs.html',
-          parent: angular.element(document.body),
-          targetEvent: ev,
-          clickOutsideToClose: true,
-          fullscreen: $scope.customFullscreen // Only for -xs, -sm breakpoints.
-        })
-        .then(function (user) {
-          if (!user)
-            console.log("no data")
-          else {
-
-            configService.updateUser(user, response => {
-              if (response.data.name) {
-                $localStorage.currentUser.user = response.data.name;
-                $scope.username = $localStorage.currentUser.user;
-                $scope.saveSucess('Users configs saved successfully!');
-              } else {
-
-                $scope.saveSucess('Error, that email was already in use!');
-
-
-
-              }
-              /////////
-            })
-          }
-        }, function () {
-          $scope.status = 'You cancelled the dialog.';
-        });
-    };
-
-    function configController($scope, $mdDialog) {
-      
-
-      configService.getUser(response => {
-        $scope.user = response.data;
+        controller: "configController",
+        templateUrl: 'templates/userConfigs.html',
+        parent: angular.element(document.body),
+        targetEvent: ev,
+        scope: $scope.$new(false, $scope), 
+        preserveScope: false,
+        clickOutsideToClose: true,
+        fullscreen: $scope.customFullscreen // Only for -xs, -sm breakpoints.
       })
 
-      $scope.hide = function () {
-        $mdDialog.hide();
-      };
-
-      $scope.cancel = function () {
-        $mdDialog.cancel();
-      };
-
-      $scope.save = function (user) {
-        $mdDialog.hide(user);
-      };
-    }
-
-
-
+    };
 
     $scope.showAdvanced = function (ev) {
       $mdDialog.show({
-          controller: DialogController,
-          templateUrl: 'templates/add.html',
-          parent: angular.element(document.body),
-          targetEvent: ev,
-          clickOutsideToClose: true,
-          fullscreen: $scope.customFullscreen // Only for -xs, -sm breakpoints.
-        })
-        .then(function (data) {
-          if (!data)
-            console.log("no data")
-          else {
-            todoService.addTodo(data, function (result) {
-              console.log(result.data.t[0])
-              if (result.data.t[0])
-                $scope.todos.push(result.data.t[0]);
-            })
-          }
-        }, function () {
-          $scope.status = 'You cancelled the dialog.';
-        });
+        controller: "AddController",
+        templateUrl: 'templates/add.html',
+        parent: angular.element(document.body),
+        targetEvent: ev,
+        scope: $scope.$new(false, $scope), 
+        preserveScope: false,
+        clickOutsideToClose: true,
+        fullscreen: $scope.customFullscreen // Only for -xs, -sm breakpoints.
+      })
     };
 
-    function DialogController($scope, $mdDialog) {
-      $scope.hide = function () {
-        $mdDialog.hide();
-      };
 
-      $scope.cancel = function () {
-        $mdDialog.cancel();
-      };
-
-      $scope.add = function (text, goalDate) {
-
-        $mdDialog.hide({
-          text,
-          goalDate
-        });
-      };
-    }
   });

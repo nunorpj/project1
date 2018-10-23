@@ -1,5 +1,5 @@
 angular.module('myApp').controller('signUpCtrl',
-    function ($scope, autenticationService, $location) {
+    function ($scope, autenticationService, $location,$rootScope) {
 
         autenticationService.ClearCredentials();
 
@@ -16,11 +16,10 @@ angular.module('myApp').controller('signUpCtrl',
                 console.log(response)
                 if(!response.data.sucess){
                     $scope.error="Email already in use!";
-                    $scope.success=false;  
                 }else{
                     $scope.error=false;
                     $location.path('/')
-                    $scope.success="Accout created successfully!"
+                    $rootScope.success="Accout created successfully!"
                 }
             }).catch(err=>{
                 $scope.error = err.data;
