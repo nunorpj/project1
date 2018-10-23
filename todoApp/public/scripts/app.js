@@ -42,8 +42,7 @@ config(['$stateProvider', function($stateProvider) {
       $rootScope.$on('$locationChangeStart', function (event, next, current) {
           var publicPages = ['/','/signUp'];
           var restrictedPage = publicPages.indexOf($location.path()) === -1;
-          console.log(restrictedPage)
-          console.log($location.path())
+
           if (restrictedPage && !$localStorage.currentUser) {
               $location.path('/');
           }

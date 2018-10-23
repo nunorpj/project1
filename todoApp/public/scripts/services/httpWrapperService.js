@@ -23,7 +23,7 @@ angular.module('myApp').service('httpWraperService', function($http, $location) 
     //login, registry
     this.publicPost= function(path,data,cb){
         let url = this.protocol + '//' + this.host + path; 
-        $http.post(url,data).then(cb)
+        return $http.post(url,data).then(cb)
     }
 
 

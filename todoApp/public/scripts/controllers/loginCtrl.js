@@ -15,12 +15,9 @@ angular.module('myApp').controller('loginCtrl',
                 if (response.data.token) {
                     autenticationService.SetCredentials(response.data);
                     $location.path('/dashboard')
-                } else {
-                    $scope.error = "Invalid email or password!";
-                    $scope.success = false;
-
-
                 }
+            }).catch(err=>{
+                $scope.error=err.data
             })
         }
 

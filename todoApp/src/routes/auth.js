@@ -1,11 +1,10 @@
 const router = module.exports = require('express').Router();
-const login = require("./../core/auth").login
-const registry = require("./../core/auth").registry
+const {login,registry,verifyRegistryData,verifyLogInData} = require("./../core/auth")
 
 
-router.post("/api/login",login);
+router.post("/api/login",verifyLogInData,login);
 
-router.post("/api/registry",registry);
+router.post("/api/registry",verifyRegistryData,registry);
 
 
 

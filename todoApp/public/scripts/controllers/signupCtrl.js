@@ -8,6 +8,10 @@ angular.module('myApp').controller('signUpCtrl',
         }
 
         $scope.registry = function (data) {
+
+            if(!data.email || !data.password || !data.name)
+                return 
+
             autenticationService.registry(data, function (response) {
                 console.log(response)
                 if(!response.data.sucess){
@@ -17,11 +21,9 @@ angular.module('myApp').controller('signUpCtrl',
                     $scope.error=false;
                     $location.path('/')
                     $scope.success="Accout created successfully!"
-
                 }
-
-
-
+            }).catch(err=>{
+                $scope.error = err.data;
             })
         }
 
