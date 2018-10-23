@@ -1,0 +1,56 @@
+const User = require("../../models/user");
+const jwt = require("jsonwebtoken");
+
+function login(req, res) {
+    User.findOne({
+        email: req.body.email,
+        password: req.body.password
+    }).then(user => {
+        if (user) {
+            var playload = user._id;
+            jwt.sign({
+                    playload
+                },
+                "secretkey",
+                (err, token) => {
+                    console.log(err);
+                    res.json({
+                        message: "loged in",
+                        token,
+                        user
+                    });
+                }
+            );
+        } else {
+            res.json({
+                message: "error"
+            });
+        }
+    });
+}
+
+function registry(req, res) {
+    console.log(req.body);
+
+    const newUser = new User({
+        email: req.body.email,
+        password: req.body.password,
+        name: req.body.name
+    });
+
+    newUser
+        .save()
+        .then(savedUser => {
+            res.send({
+                sucess: "User saved!"
+            });
+        })
+        .catch(err => {
+            res.send({
+                err
+            });
+        });
+}
+
+module.exports.login = login;
+module.exports.registry = registry;
