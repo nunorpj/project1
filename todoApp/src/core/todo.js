@@ -36,11 +36,15 @@ function editTodo(req, res) {
 
 
 function insertTodo(req, res) {
+    
+    
+
+    
     if (req.body.text && req.body.date) {
         var newTodo = new Todo({
             text: req.body.text,
-            date: new Date(req.body.date),
-            goalDate: !req.body.goalDate ? null : new Date(req.body.goalDate),
+            date: moment(req.body.goalDate).format("YYYY-MM-DD"),
+            goalDate: !req.body.goalDate ? null : moment(req.body.goalDate).format("YYYY-MM-DD"),
             owner: req.authData.playload
         });
 

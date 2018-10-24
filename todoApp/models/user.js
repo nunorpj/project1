@@ -34,6 +34,10 @@ const UserSchema = new Schema({
         max: 23,
         default: 00
         
+    },
+    date:{
+        type:Date,
+        required:true,
     }
 
 });

@@ -1,5 +1,7 @@
 const User = require("../../models/user");
 const jwt = require("jsonwebtoken");
+const moment = require("moment")
+
 
 function login(req, res) {
     User.findOne({
@@ -29,11 +31,11 @@ function login(req, res) {
 }
 
 function registry(req, res) {
-    console.log("aqui")
     const newUser = new User({
         email: req.body.email,
         password: req.body.password,
-        name: req.body.name
+        name: req.body.name,
+        date: moment().format("YYYY-MM-DD")
     });
 
     newUser
