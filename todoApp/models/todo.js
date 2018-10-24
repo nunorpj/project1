@@ -18,6 +18,11 @@ const TodoSchema = new Schema({
     done:{
         type: Boolean,
         default:false,
+    },
+    owner:{
+        type: Schema.Types.ObjectId, ref: 'users' ,
+        require:true,
+
     }
 
 })

@@ -1,4 +1,4 @@
-const User = require("../../models/user");
+const Todo = require("../../models/todo");
 
 
 function verifyTodoData(req,res,next){
@@ -17,14 +17,13 @@ function verifyTodoData(req,res,next){
 
 function verifyOwnership(req,res,next){
 
-    User.findById(req.authData.playload).then(user=>{
+    Todo.findById(req.params.id).then(todo=>{
+
        
-        if(user.todos.indexOf(req.params.id) == -1){
+        if(req.authData.playload!=todo.owner){
             res.status(403).send("Not your's taks.")
             return
         }
-
-        
     })
 
     next();

@@ -18,11 +18,13 @@ angular.module('myApp')
 
             } else {
                 todoService.addTodo({text,goalDate}, function (result) {
-                    if (result.data.t[0])
-                      $scope.todos.push(result.data.t[0])
+
+                    if (result.data.todo)
+                      $scope.todos.push(result.data.todo)
                       $mdDialog.hide();
                 }).catch(err=>{
-                    console.log(err.data)
+
+                    console.log(err)
                 })
             }
 

@@ -2,7 +2,7 @@ const router = module.exports = require('express').Router();
 const verifyToken = require("../middlewares/verifyToken");
 const {deleteTodo,editTodo,insertTodo,getTodos} = require("../core/todo")
 
-const {verifyTodoData,verifyOwnership} = require("../middlewares/tudo")
+const {verifyTodoData,verifyOwnership} = require("../middlewares/todo")
 
 router.delete("/api/delete/:id", verifyToken,verifyOwnership, deleteTodo);
 
