@@ -10,17 +10,7 @@ angular.module('myApp')
       $scope.todos = data.data;
     })
 
-    $scope.deleteTodo = function (data, index) {
-      todoService.deleteTodo(data, function (result) {
-        //  $scope.todos.splice(index, 1);
-        console.log(result)
 
-        todoService.getTodos(function (data) {
-          $scope.todos = data.data;
-
-        })
-      })
-    }
 
 
     $scope.logout = function () {

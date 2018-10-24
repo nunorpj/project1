@@ -34,11 +34,26 @@ angular.module('myApp')
 
         $scope.editTodo = function (data) {
             todoService.editTodo(data, function (result) {
-                console.log(result)
+                $scope.editing=false;
+            }).catch(err=>{
+                console.log(err)
             })
         }
 
 
+
+
+        $scope.deleteTodo = function (data, index) {
+            todoService.deleteTodo(data, function (result) {
+              //  $scope.todos.splice(index, 1);        
+              todoService.getTodos(function (data) {
+                $scope.$parent.todos = data.data;
+        
+              })
+            }).catch(err=>{
+                console.log(err)
+            })
+          }
 
 
     });

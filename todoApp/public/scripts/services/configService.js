@@ -5,7 +5,7 @@ angular.module('myApp').service('configService', function($http, httpWraperServi
     }
         
     this.updateUser= function(data,cb){
-        httpWraperService.privatePut('/api/user', data, cb);
+        return httpWraperService.privatePut('/api/user', data, cb);
     }
 
 });

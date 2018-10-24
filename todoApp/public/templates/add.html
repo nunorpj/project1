@@ -1,5 +1,5 @@
 <md-dialog aria-label="Add TODO" flex-gt-md="25" flex="90" flex-sm="50" flex-md="40">
-  <form ng-cloak >
+  <form ng-cloak name="addForm">
 
 
     <md-toolbar class="topAddDialog">
@@ -18,9 +18,13 @@
 
 
       <md-input-container  style="width: 92%; margin-top:30px">
-        <label style="margin:10px">
-          Todo:</label>
-        <input type="text"  ng-model="text" placeholder="  " required>
+
+        <input type="text"  ng-model="text" placeholder="Task" required  ng-minlength="2">
+        <div ng-messages="addForm.$error">
+          <div ng-message="required">A task is required</div>
+          <div ng-message="minlength">The task must be at least 2 characters long.</div>
+
+        </div>
       </md-input-container>
 
 

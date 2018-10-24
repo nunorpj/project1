@@ -1,4 +1,4 @@
-<div layout="row" ng-controller="todoCtrl" class="todoconteiner">
+<form layout="row" ng-controller="todoCtrl" class="todoconteiner">
 
   <div flex-gt-md="5" flex="10" layout="column" layout-align="center center">
 
@@ -14,7 +14,7 @@
       <p ng-hide="editing">{{todo.text}}</p>
       
       
-      <input ng-show="editing" type="text" ng-model="todo.text" maxlength="120"  />
+      <input ng-show="editing" type="text" ng-model="todo.text" maxlength="120" required minlength="2" />
 
     </div>
 
@@ -36,8 +36,8 @@
   <div ng-hide="mobile" class="todoend " layout="column" layout-align="center start">
     <md-button class="md-raised md-warn" ng-click="editing=true" ng-hide="editing || todo.done " 
     style="width: 40%; background: #007286; border-radius:5px">Edit</md-button>
-    <md-button class="md-raised md-warn" ng-click="editing=false ;editTodo(todo)" ng-show="editing" 
-    style="width: 40%; background: #008952; border-radius:5px">Save</md-button>
+    <md-button class="md-raised md-warn" ng-click="editTodo(todo)" ng-show="editing" 
+    style="width: 40%; background: #008952; border-radius:5px" type="submit">Save</md-button>
     <md-button md-ripple-size="partial" class="md-raised md-warn" ng-click="deleteTodo(todo,$index)" ng-hide="editing"
     style="width: 40%; background:rgb(246, 52, 3); border-radius:5px ">Delete</md-button>
 
@@ -51,9 +51,8 @@
         </md-button>
     
 
-      <md-button class="md-fab md-mini md-hue-3" aria-label=" "  ng-click="editing=false ;editTodo(todo)" ng-show="editing"
-      style="background:#008952;"
-      >
+      <md-button class="md-fab md-mini md-hue-3" aria-label=" "  ng-click="editTodo(todo)" ng-show="editing"
+      style="background:#008952;" type="submit" >
           <md-icon md-svg-src="img/save.svg"></md-icon>
         </md-button>
 
@@ -68,4 +67,4 @@
 
   </div>
 
-</div>
+</form>

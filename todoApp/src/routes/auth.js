@@ -1,6 +1,8 @@
 const router = module.exports = require('express').Router();
-const {login,registry,verifyRegistryData,verifyLogInData} = require("./../core/auth")
+const {login,registry} = require("./../core/auth")
 
+
+const {verifyRegistryData,verifyLogInData} = require('../middlewares/auth')
 
 router.post("/api/login",verifyLogInData,login);
 

@@ -1,7 +1,7 @@
 const User = require("../../models/user");
 
 
-function getUser(req, res){
+function getUser(req, res) {
 
     User.findOne({
             _id: req.authData.playload
@@ -20,7 +20,7 @@ function getUser(req, res){
         });
 }
 
-function editUser  (req, res){
+function editUser(req, res) {
 
     User.findOne({
             _id: req.authData.playload
@@ -59,6 +59,5 @@ function editUser  (req, res){
 }
 
 
-module.exports.getUser =getUser;
+module.exports.getUser = getUser;
 module.exports.editUser = editUser;
-

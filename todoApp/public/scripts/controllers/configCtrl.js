@@ -19,12 +19,12 @@ angular.module('myApp')
 
             $scope.save = function (user) {
 
-
-                if (!user){
+                console.log(user)
+                if (!user) {
                     console.log("no data")
                     return
 
-                }else {
+                } else {
 
                     configService.updateUser(user, response => {
                         if (response.data.name) {
@@ -34,7 +34,10 @@ angular.module('myApp')
                             $scope.$parent.username = $localStorage.currentUser.user;
 
                         }
-                    })//.catch() fazer catch do erro p ver se o email pode ser alterado.
+                    }).catch(err => {
+                        $scope.toastShow(err.data)
+
+                    })
                 }
 
 
