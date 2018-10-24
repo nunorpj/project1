@@ -44,7 +44,6 @@ function editUser(req, res) {
             user
                 .save()
                 .then(userSaved => {
-                    console.log(userSaved);
                     res.send({
                         name: userSaved.name
                     });

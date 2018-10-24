@@ -19,15 +19,14 @@ const transporter = nodemailer.createTransport({
 
 
 var j = schedule.scheduleJob('00 * * * *', function () {
-
     var time = moment().format("H");
 
-    var users = User.find({
+    User.find({
         notifications: true,
         sendingHour: time
     }).then(users => {
         users.forEach(user => {
-            var todos = Todo.find({
+            Todo.find({
                 owner: user._id,
                 done: false
             }).then(todos => {
@@ -35,7 +34,8 @@ var j = schedule.scheduleJob('00 * * * *', function () {
 
                 todos.forEach(todo => {
 
-                    if (sameDay(todo.date, new Date())) {
+                    if(moment(todo.date).isSame(moment(new Date()),"day"))
+                    {
                         itensToSend.push(todo.text);
                     }
                 })
@@ -76,8 +76,3 @@ var j = schedule.scheduleJob('00 * * * *', function () {
 });
 
 
-function sameDay(d1, d2) {
-    return d1.getFullYear() === d2.getFullYear() &&
-        d1.getMonth() === d2.getMonth() &&
-        d1.getDate() === d2.getDate();
-}

@@ -31,18 +31,19 @@ function verifyLogInData(req, res, next) {
         return
     }
 
-    emailVerify(req.body.email,docs => {
-        if(docs.length==0){
-            res.status(400).send("Email doesn't exists")
-            return
-        }
-    })
-
     if (req.body.password.length < 6) {
         res.status(400).send("Password must be at least 6 characters long")
         return
     }
-    next();
+
+    emailVerify(req.body.email,docs => {
+        if(docs.length==0){
+            res.status(400).send("Email doesn't exists")
+            return
+        }else{
+            next();
+        }
+    })
 }
 
 function emailVerify(email,cb) {

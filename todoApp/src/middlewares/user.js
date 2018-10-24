@@ -1,10 +1,9 @@
 const User = require("../../models/user");
 
-function verifyUserData(req, res, next) {
-    if (!req.body.email && !req.body.password && !req.body.name && !req.body.notifications && !req.body.sendingHour) {
-        res.status(400).send("Missing params")
-        return
-    }
+
+
+
+ function verifyUserData(req, res, next) {
     if (req.body.name) {
         if (req.body.name < 4) {
             res.status(400).send("Name it's to short")
@@ -18,25 +17,36 @@ function verifyUserData(req, res, next) {
         }
     }
 
-    if (req.body.email) {
-        emailVerify(req.body.email, docs => {
-            if (docs.length > 0) {
-                res.status(400).send("Email already in use")
-                return
 
-            }
-        })
+    if (req.body.sendingHour) {
+        if (req.body.sendingHour < 0 && req.body.sendingHour > 23) {
+            res.status(400).send("Invalid hour")
+            return
+        }
     }
 
-    next();
+
+     emailVerify(req.body.email,(err,docs) => {
+        if (docs.length != 0) {
+            if (docs[0]._id != req.authData.playload) {
+                res.status(400).send("Email already exists")
+                return 
+            }else{
+                next();
+            }
+        }else{
+            next()
+        }
+    })
 
 }
 
-function emailVerify(email, cb) {
+
+ function emailVerify(email, cb) {
     User.find({
-            email: email
-        })
-        .then(cb)
+          email: email
+      })
+      .exec(cb)
 }
 
 
