@@ -4,9 +4,9 @@ const {login,registry} = require("./../core/auth")
 
 const {verifyRegistryData,verifyLogInData} = require('../middlewares/auth')
 
-router.post("/api/login",verifyLogInData,login);
+router.post("/login",verifyLogInData,login);
 
-router.post("/api/registry",verifyRegistryData,registry);
+router.post("/registry",verifyRegistryData,registry);
 
 
 

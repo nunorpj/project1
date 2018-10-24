@@ -4,7 +4,6 @@ angular.module('myApp')
     .controller('configController',
         function ($scope, $mdDialog, configService, $localStorage) {
 
-
             configService.getUser(response => {
                 $scope.user = response.data;
             })

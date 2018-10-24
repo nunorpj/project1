@@ -6,7 +6,7 @@ angular.module('myApp').controller('loginCtrl',
         console.log($rootScope.success)
         
         $scope.gotoSignUp = function () {
-            $location.path('signUp')
+            $location.path('/signUp')
 
         }
 
@@ -18,6 +18,7 @@ angular.module('myApp').controller('loginCtrl',
                     $location.path('/dashboard')
                 }
             }).catch(err=>{
+                console.log(err)
                 $scope.error=err.data
             })
         }

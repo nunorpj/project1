@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('myApp')
-    .controller('AddController', function ($scope, $mdDialog, todoService,$rootScope) {
+    .controller('AddController', function ($scope, $mdDialog, todoService) {
         
         $scope.hide = function () {
             $mdDialog.hide();
@@ -13,9 +13,7 @@ angular.module('myApp')
 
         $scope.add = function (text, goalDate) {
             if (!text) {
-
                 return
-
             } else {
                 todoService.addTodo({text,goalDate}, function (result) {
 

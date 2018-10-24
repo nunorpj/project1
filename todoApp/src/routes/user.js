@@ -5,6 +5,6 @@ const verifyUserData = require("../middlewares/user").verifyUserData
 
 
 
-router.get("/api/user", verifyToken,getUser);
+router.get("/user", verifyToken,getUser);
 
-router.put("/api/user", verifyToken,verifyUserData,editUser);
+router.put("/user", verifyToken,verifyUserData,editUser);

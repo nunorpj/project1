@@ -13,9 +13,9 @@ module.exports = function (app) {
     );
     
 
-    app.use("/", auth);
-    app.use("/", userData)
-    app.use("/", todoData)
+    app.use("/api/auth", auth);
+    app.use("/api/user", userData)
+    app.use("/api/todo", todoData)
 
 };
 

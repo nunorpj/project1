@@ -1,16 +1,13 @@
 'use strict';
 
 angular.module('myApp')
-  .controller('mainCtrl', function ($rootScope, $localStorage, $scope, $mdDialog, $location, todoService, $mdToast, autenticationService) {
+  .controller('dashboardCtrl', function ($rootScope, $localStorage, $scope, $mdDialog, $location, todoService, $mdToast, autenticationService) {
     $scope.username = $localStorage.currentUser.user;
 
-    
 
     todoService.getTodos(function (data) {
       $scope.todos = data.data;
     })
-
-
 
 
     $scope.logout = function () {

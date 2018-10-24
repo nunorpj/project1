@@ -1,4 +1,5 @@
 const User = require("../../models/user");
+const bcrypt = require('bcrypt');
 
 
 function getUser(req, res) {
@@ -21,39 +22,48 @@ function getUser(req, res) {
 }
 
 function editUser(req, res) {
-
     User.findOne({
             _id: req.authData.playload
         })
         .then(user => {
             user.name = req.body.name ? req.body.name : user.name;
             user.email = req.body.email ? req.body.email : user.email;
-            user.password = req.body.password ?
-                req.body.password :
-                user.password;
-            user.sendingHour = req.body.sendingHour ?
-                req.body.sendingHour :
-                user.sendingHour;
 
             if (req.body.notifications != undefined)
                 user.notifications = req.body.notifications;
 
-            if (user.sendingHour != undefined)
+            if (req.body.sendingHour != undefined)
                 user.sendingHour = req.body.sendingHour;
 
-            user
-                .save()
-                .then(userSaved => {
-                    res.send({
-                        name: userSaved.name
-                    });
+
+            if (req.body.password != undefined) {
+                bcrypt.hash(req.body.password, Number(process.env.PASSWORDSALTROUNDS)).then( hash=> {
+
+                    user.password=hash;
+                }).then(() => {
+                    user.save()
+                        .then(userSaved => {
+                            res.send({
+                                name: userSaved.name
+                            });
+                        })
+
                 })
-                .catch(err => {
-                    res.send("COULDNT GET TODOS BECAUSE....." + err);
-                });
+            } else {
+                
+                user.save()
+                    .then(userSaved => {
+                        res.send({
+                            name: userSaved.name
+                        });
+                    })
+            }
+
+
+
         })
         .catch(err => {
-            res.send("COULDNT GET TODOS BECAUSE....." + err);
+            res.send("COULDNT UPDATE USER BECAUSE....." + err);
         });
 }
 
