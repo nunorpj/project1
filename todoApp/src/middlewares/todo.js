@@ -1,4 +1,4 @@
-const Todo = require("../../models/todo");
+const Todo = require("../db/models/todo");
 
 
 function verifyTodoData(req,res,next){

@@ -4,7 +4,7 @@ angular.module('myApp')
     .controller('configController',
         function ($scope, $mdDialog, configService, $localStorage) {
 
-            configService.getUser(response => {
+            configService.getUser().then(response => {
                 $scope.user = response.data;
             })
 
@@ -25,7 +25,7 @@ angular.module('myApp')
 
                 } else {
 
-                    configService.updateUser(user, response => {
+                    configService.updateUser(user).then( response => {
                         if (response.data.name) {
                             $localStorage.currentUser.user = response.data.name;
                             $scope.username = $localStorage.currentUser.user;

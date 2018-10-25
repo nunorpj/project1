@@ -1,4 +1,4 @@
-const User = require("../../models/user");
+const User = require("../db/models/user");
 
 function verifyRegistryData(req, res, next) {
     if (!req.body.email || !req.body.password || !req.body.name) {

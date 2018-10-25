@@ -12,7 +12,7 @@ angular.module('myApp').controller('loginCtrl',
 
 
         $scope.login = function (user) {
-            autenticationService.login(user.email, user.password, function (response) {
+            autenticationService.login(user.email, user.password).then( response => {
                 if (response.data.token) {
                     autenticationService.SetCredentials(response.data);
                     $location.path('/dashboard')

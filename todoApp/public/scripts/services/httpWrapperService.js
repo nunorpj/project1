@@ -21,36 +21,36 @@ angular.module('myApp').service('httpWraperService', function($http, $location) 
     
 
     //login, registry
-    this.publicPost= function(path,data,cb){
+    this.publicPost= function(path,data){
         let url = this.protocol + '//' + this.host + path; 
-        return $http.post(url,data).then(cb)
+        return $http.post(url,data)
     }
 
 
 
-    this.privateGet = function(path,cb){
+    this.privateGet = function(path){
         if(!this.checkHeader()) return;
         let url = this.protocol + '//' + this.host + path; 
-        $http.get(url,this.header).then(cb);
+        return $http.get(url,this.header)
     }
 
 
-    this.privatePost =function(path,data,cb){
+    this.privatePost =function(path,data){
         if(!this.checkHeader()) return;
         let url = this.protocol + '//' + this.host + path;     
-        return $http.post(url,data,this.header).then(cb);
+        return $http.post(url,data,this.header)
     }
 
-    this.privatePut = function(path,data,cb){
+    this.privatePut = function(path,data){
         if(!this.checkHeader()) return;
         let url = this.protocol + '//' + this.host + path;    
-        return $http.put(url,data,this.header).then(cb);
+        return $http.put(url,data,this.header)
     }
 
-    this.privateDelete = function(path,cb){
+    this.privateDelete = function(path){
         if(!this.checkHeader()) return;
         let url = this.protocol + '//' + this.host + path;    
-        return $http.delete(url,this.header).then(cb)
+        return $http.delete(url,this.header)
     }
 
     this.checkHeader = function(){

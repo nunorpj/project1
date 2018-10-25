@@ -12,7 +12,7 @@ angular.module('myApp').controller('signUpCtrl',
             if(!data.email || !data.password || !data.name)
                 return 
 
-            autenticationService.registry(data, function (response) {
+            autenticationService.registry(data).then(response=> {
                 console.log(response)
                 if(!response.data.sucess){
                     $scope.error="Email already in use!";

@@ -2,7 +2,7 @@
 
 angular.module('myApp')
     .controller('AddController', function ($scope, $mdDialog, todoService) {
-        
+
         $scope.hide = function () {
             $mdDialog.hide();
         };
@@ -15,13 +15,14 @@ angular.module('myApp')
             if (!text) {
                 return
             } else {
-                todoService.addTodo({text,goalDate}, function (result) {
-
+                todoService.addTodo({
+                    text,
+                    goalDate
+                }).the(result => {
                     if (result.data.todo)
-                      $scope.todos.push(result.data.todo)
-                      $mdDialog.hide();
-                }).catch(err=>{
-
+                        $scope.todos.push(result.data.todo)
+                    $mdDialog.hide();
+                }).catch(err => {
                     console.log(err)
                 })
             }

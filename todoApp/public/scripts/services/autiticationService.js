@@ -1,11 +1,11 @@
 angular.module('myApp').service('autenticationService', function($localStorage,httpWraperService) {
 
-    this.login= function(email,password,cb){
-        return httpWraperService.publicPost('/api/auth/login',{ email: email, password: password },cb)
+    this.login= function(email,password){
+        return httpWraperService.publicPost('/api/auth/login',{ email: email, password: password })
     }
         
-    this.registry= function(data,cb){
-       return httpWraperService.publicPost('/api/auth/registry',data,cb)
+    this.registry= function(data){
+       return httpWraperService.publicPost('/api/auth/registry',data)
     }
 
     this.SetCredentials = function(data){

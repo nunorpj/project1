@@ -1,5 +1,5 @@
-const User = require("../../models/user");
-const Todo = require("../../models/todo");
+const User = require("../db/models/user");
+const Todo = require("../db/models/todo");
 const moment = require("moment");
 
 

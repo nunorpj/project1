@@ -26,14 +26,8 @@ angular.module('myApp')
         });
 
 
-
-
-
-
-
-
         $scope.editTodo = function (data) {
-            todoService.editTodo(data, function (result) {
+            todoService.editTodo(data).then(result=> {
                 $scope.editing=false;
             }).catch(err=>{
                 console.log(err)
@@ -42,9 +36,8 @@ angular.module('myApp')
 
 
 
-
         $scope.deleteTodo = function (data, index) {
-            todoService.deleteTodo(data, function (result) {
+            todoService.deleteTodo(data).then(result=> {
               //  $scope.todos.splice(index, 1);        
               todoService.getTodos(function (data) {
                 $scope.$parent.todos = data.data;

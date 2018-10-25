@@ -5,7 +5,8 @@ angular.module('myApp')
     $scope.username = $localStorage.currentUser.user;
 
 
-    todoService.getTodos(function (data) {
+    todoService.getTodos().then( 
+      data=> {
       $scope.todos = data.data;
     })
 

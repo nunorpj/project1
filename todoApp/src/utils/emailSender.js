@@ -1,6 +1,6 @@
 const nodemailer = require('nodemailer');
-const User = require('../../models/user');
-const Todo = require('../../models/todo')
+const User = require('../db/models/user');
+const Todo = require('../db/models/todo')
 const moment = require('moment');
 
 var CronJob = require('cron').CronJob;
@@ -17,7 +17,7 @@ const transporter = nodemailer.createTransport({
 });
 
 
-const job = new CronJob('00 29 * * * *', function() {
+const job = new CronJob('00 00 * * * *', function() {
     var time = moment().format("H");
     console.log("mails");
     
