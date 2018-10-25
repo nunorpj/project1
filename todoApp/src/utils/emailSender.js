@@ -1,10 +1,9 @@
-var nodemailer = require('nodemailer');
-var schedule = require('node-schedule');
-const mongoose = require('mongoose')
+const nodemailer = require('nodemailer');
 const User = require('../../models/user');
 const Todo = require('../../models/todo')
 const moment = require('moment');
 
+var CronJob = require('cron').CronJob;
 
 const transporter = nodemailer.createTransport({
     service: 'gmail',
@@ -18,9 +17,10 @@ const transporter = nodemailer.createTransport({
 });
 
 
-var j = schedule.scheduleJob('00 * * * *', function () {
+const job = new CronJob('00 29 * * * *', function() {
     var time = moment().format("H");
-
+    console.log("mails");
+    
     User.find({
         notifications: true,
         sendingHour: time
@@ -34,11 +34,13 @@ var j = schedule.scheduleJob('00 * * * *', function () {
 
                 todos.forEach(todo => {
 
-                    if(moment(todo.date).isSame(moment(new Date()),"day"))
+                    if(moment(todo.goalDate).isSame(moment(new Date()),"day"))
                     {
                         itensToSend.push(todo.text);
                     }
                 })
+                console.log("bora "+ user.email + " tens " + itensToSend.length);
+
 
                 var itensToSendString = 'Bom dia hoje tem programado:\n';
                 var itensToSendStringHtml ='Bom dia hoje tem programado:' +'<br>'
@@ -69,10 +71,7 @@ var j = schedule.scheduleJob('00 * * * *', function () {
 
     })
 
+}, null, false);
 
 
-
-
-});
-
-
+module.exports.job = job;

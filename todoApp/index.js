@@ -1,18 +1,16 @@
 const express = require("express");
 const mongoose = require("mongoose");
 const app = express();
-const bodyParser = require("body-parser");
 const dotenv = require("dotenv");
 const result = dotenv.config();
-require("./src/utils/emailSender");
+const emailJob = require("./src/utils/emailSender").job;
+emailJob.start();
 require("./src/routes/routersConfi")(app);
-
 
 if (result.error) {
     console.log(".env file missing!");
     process.exit();
 }
-
 
 mongoose.connect(
     process.env.MONGOOSE, {
@@ -25,13 +23,16 @@ mongoose.connection
         console.log(`could not connect`, err);
     });
 
-
-
-
 app.use(express.static(__dirname + "/public"));
-app.listen(process.env.PORT, err => {
-    console.log("Runing on port " + process.env.PORT);
+
+
+process.on('exit', function () {
+    emailJob.stop();
 });
 
+app.listen(process.env.PORT, err => {
 
-
+    console.log("Runing on port " + process.env.PORT);
+}).on('error', err => {
+    console.log(err)
+})
