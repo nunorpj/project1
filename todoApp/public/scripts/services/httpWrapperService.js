@@ -61,11 +61,34 @@ angular.module('myApp').service('httpWraperService', function($http, $location) 
         return true
     }
 
+
+    this.privatePostPic=function(path,data){
+        if(!this.checkHeader()) return;
+        let url = this.protocol + '//' + this.host + path;    
+
+        let fileHeader={
+            transformRequest: angular.identity,
+            headers: {
+                'Content-Type': undefined,
+                'Authorization': this.header.headers.Authorization
+            }
+        }
+        return $http.post(url,data,fileHeader)
+
+        
+
+    }
+
+
     this.responseError = function(error){
         if(error.status==403){
             console.log("access forbidden " + 403)
             $location.path('/');
         }
     }
+
+
+
+
 
 });

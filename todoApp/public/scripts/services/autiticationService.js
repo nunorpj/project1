@@ -15,7 +15,9 @@ angular.module('myApp').service('autenticationService', function($localStorage,h
             token: data.token,
         };
 
-        httpWraperService.setHeader({ headers: {'Authorization': 'Bearer ' + $localStorage.currentUser.token}});
+        httpWraperService.setHeader({ headers: {
+            'Authorization': 'Bearer ' + $localStorage.currentUser.token,
+        }});
 
 
     }

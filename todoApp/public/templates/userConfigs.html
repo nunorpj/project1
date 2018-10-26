@@ -1,5 +1,7 @@
 <md-dialog aria-label="userConf" flex-gt-md="30" flex="90" flex-sm="50" flex-md="40" layout-lg="30">
-    <form ng-cloak flex ng-submit="save(user)">
+
+
+    <md-dialog-content ng-cloak flex ng-submit="save(user)">
         <md-toolbar class="topConfig">
             <div class="md-toolbar-tools">
                 <h2>User Configurations</h2>
@@ -10,8 +12,35 @@
             </div>
         </md-toolbar>
 
-        <md-dialog-content layout="row" layout-align="center center" flex>
+        <div style="height: 150px;" layout="row" layout-align="space-around center" layout-align-gt-sm="start center">
+
+            <img ng-src="{{pic}}" style="width: 120px;height: 120px;background: #959494" flex-offset-gt-sm="5" />
+
+
+            <div   layout="column" layout-align="center center" flex-offset-gt-sm="5" enctype="multipart/form-data">
+                <md-input-container style="width:200px;">
+                    <input type="file" file-model="myFile" />
+                </md-input-container>
+                
+                
+                <md-button  ng-click="uploadFile()"  style="background: #008952;width: 100px !important" class="md-raised md-warn">save</md-button>
+
+
+                <span>{{msgfile}}</span>
+            </div>
+        </div>
+
+
+
+        <form layout="row" layout-align="center center" flex enctype="multipart/form-data">
+
+
             <div layout="column" flex="90" layout-align="stretch stretch">
+
+
+
+
+
 
                 <md-input-container style="margin-top: 20px">
                     <label>Name</label>
@@ -32,7 +61,7 @@
 
                 <md-input-container style="margin-top: -15px">
                     <label>New password</label>
-                    <input ng-model="user.password" type="password" ng-model="user.password" ng-minlength="6" pattern=".{6,}" > 
+                    <input ng-model="user.password" type="password" ng-model="user.password" ng-minlength="6" pattern=".{6,}">
                     <div ng-messages="registryForm.$error">
                         <div ng-message="required">Password is required</div>
                         <div ng-message="minlength">Password must be at least 6 characters.</div>
@@ -40,7 +69,7 @@
                 </md-input-container>
 
 
-                <div flex layout="row"  layout-align="space-between center">
+                <div flex layout="row" layout-align="space-between center">
                     <md-input-container style="margin-top: -35px">
                         <md-switch md-invert class="md-primary" name="special" ng-model="user.notifications">
                             Enable notifications:
@@ -49,23 +78,27 @@
                     </md-input-container>
                     <md-input-container ng-show="user.notifications" flex="30">
                         <label>Sending Hour</label>
-                        <input type="number" min="00" max="23"  ng-model="user.sendingHour">
+                        <input type="number" min="00" max="23" ng-model="user.sendingHour">
                     </md-input-container>
                 </div>
 
+                <md-dialog-actions layout="row" style="margin-top: -25px">
+
+                    <md-button ng-click="save(user)" style="background: #008952" class="md-raised md-warn">
+                        Save
+                    </md-button>
+                    <md-button aria-label="cancel" ng-click="cancel()" style="background: rgb(246, 52, 3)" class="md-raised md-warn">
+                        Cancel
+                    </md-button>
+                </md-dialog-actions>
             </div>
 
-        </md-dialog-content>
+        </form>
 
-        <md-dialog-actions layout="row" style="margin-top: -15px">
 
-            <md-button type="submit" style="background: #008952" class="md-raised md-warn">
-                Save
-            </md-button>
-            <md-button  aria-label="cancel" ng-click="cancel()" style="background: rgb(246, 52, 3)" class="md-raised md-warn">
-                Cancel
-            </md-button>
-        </md-dialog-actions>
-    </form>
+    </md-dialog-content>
+
+
+
 
 </md-dialog>

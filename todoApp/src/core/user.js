@@ -1,5 +1,7 @@
 const User = require("../db/models/user");
 const bcrypt = require('bcrypt');
+const sharp = require('sharp');
+const fs = require("fs")
 
 
 function getUser(req, res) {
@@ -37,9 +39,9 @@ function editUser(req, res) {
 
 
             if (req.body.password != undefined) {
-                bcrypt.hash(req.body.password, Number(process.env.PASSWORDSALTROUNDS)).then( hash=> {
+                bcrypt.hash(req.body.password, Number(process.env.PASSWORDSALTROUNDS)).then(hash => {
 
-                    user.password=hash;
+                    user.password = hash;
                 }).then(() => {
                     user.save()
                         .then(userSaved => {
@@ -50,7 +52,7 @@ function editUser(req, res) {
 
                 })
             } else {
-                
+
                 user.save()
                     .then(userSaved => {
                         res.send({
@@ -68,5 +70,42 @@ function editUser(req, res) {
 }
 
 
+function userImg(req, res) {    
+
+
+
+    let file  =  fs.readFileSync(req.file.path);
+
+    let dir="./src/db/img/"+req.authData.playload
+    
+    if (!fs.existsSync(dir)){
+        fs.mkdirSync(dir);
+    }
+
+    sharp(file).resize(100,100).toFile(dir + "/pic")
+
+    fs.unlink(req.file.path)
+
+    res.send("sucess")
+}
+
+
+function takeThatImg(req,res){
+
+    console.log("------------------------------------------------>>>>>>>>>>>>>>>>>>>>>>>>><")
+
+    console.log(req.params.email)
+
+    User.find({email: req.params.email}).then(user=>{
+        console.log(user._id)
+    })
+    let dir="./src/db/img/"+"5bd093c999b8b8309027815d"+ "/pic";
+    res.download(dir)
+
+
+}
+
+module.exports.userImg = userImg;
 module.exports.getUser = getUser;
 module.exports.editUser = editUser;
+module.exports.takeThatImg= takeThatImg;

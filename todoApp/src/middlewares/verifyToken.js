@@ -22,10 +22,11 @@ const verifyToken = module.exports = function (req, res, next) {
                     res.sendStatus(403);
                 } else {
                     req.authData = authData;
+                    next();
+
                 }
             
             });
-        next();
     } else {
         res.sendStatus(401);
     }
