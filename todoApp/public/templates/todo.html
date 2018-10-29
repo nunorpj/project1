@@ -1,4 +1,4 @@
-<form layout="row" ng-controller="todoCtrl" class="todoconteiner">
+<form layout="row" ng-controller="todoCtrl" class="todoconteiner" ng-class="{todoconteinerMobile: mobile && editing}">
 
   <div flex-gt-md="5" flex="10" layout="column" layout-align="center center">
 
@@ -8,60 +8,63 @@
   <div flex layout="column" layout-align="space-around stretch">
 
 
-    <div flex="80" layout="column" layout-align="center start" class="todoContentText" ng-class="{strike : todo.done}">
-      
-      
+    <div flex-gt-sm="75" flex-sm="50" flex-xs="50" layout="column" layout-align="center start" class="todoContentText" ng-class="{strike : todo.done}">
+
+
       <p ng-hide="editing">{{todo.text}}</p>
-      
-      
+
+
       <input ng-show="editing" type="text" ng-model="todo.text" maxlength="120" required minlength="2" />
 
     </div>
 
-    <div>
+    <div layout="row" layout-align="space-between center " ng-class="{todoFootMob: mobile && editing}">
       <span ng-hide="editing" ng-if="todo.goalDate" ng-class="{strike : todo.done}" style="color:rgb(63,81,181)">
         {{todo.goalDate | date : format : timezone}}
       </span>
-      
+
       <span ng-hide="editing" ng-if="!todo.goalDate" ng-class="{strike : todo.done}" style="color:rgb(63,81,181)">
-          Date not defined
+        Date not defined
       </span>
 
+      <a href="{{todo.filePath}}" ng-class="{filemobile:mobile}" ng-hide="editing" ng-if="(todo.fileName!='no file')">{{todo.fileName}}</a>
+
+      <span ng-class="{filemobile:mobile}" ng-hide="editing" ng-if="(todo.fileName=='no file')">No File</span>
+
       <md-datepicker ng-show="editing" ng-model="todo.goalDate" md-placeholder="todo.goalDate"></md-datepicker>
+
+      <input type="file" ng-show="editing" file-model="todoFile" />
 
     </div>
 
   </div>
 
   <div ng-hide="mobile" class="todoend " layout="column" layout-align="center start">
-    <md-button class="md-raised md-warn" ng-click="editing=true" ng-hide="editing || todo.done " 
-    style="width: 40%; background: #007286; border-radius:5px">Edit</md-button>
-    <md-button class="md-raised md-warn" ng-click="editTodo(todo)" ng-show="editing" 
-    style="width: 40%; background: #008952; border-radius:5px" type="submit">Save</md-button>
+    <md-button class="md-raised md-warn" ng-click="editing=true" ng-hide="editing || todo.done " style="width: 40%; background: #007286; border-radius:5px">Edit</md-button>
+    <md-button class="md-raised md-warn" ng-click="editTodo(todo)" ng-show="editing" style="width: 40%; background: #008952; border-radius:5px"
+      type="submit">Save</md-button>
     <md-button md-ripple-size="partial" class="md-raised md-warn" ng-click="deleteTodo(todo,$index)" ng-hide="editing"
-    style="width: 40%; background:rgb(246, 52, 3); border-radius:5px ">Delete</md-button>
+      style="width: 40%; background:rgb(246, 52, 3); border-radius:5px ">Delete</md-button>
 
   </div>
 
   <div ng-show="mobile" class="todoend " layout="column" layout-align="center start">
-      <md-button class="md-fab md-mini md-hue-3" aria-label=" "  ng-click="editing=true" ng-hide="editing || todo.done "
-      style="background: #007286;;"
-      >
-          <md-icon md-svg-src="img/edit.svg"></md-icon>
-        </md-button>
-    
+    <md-button class="md-fab md-mini md-hue-3" aria-label=" " ng-click="editing=true" ng-hide="editing || todo.done "
+      style="background: #007286;;">
+      <md-icon md-svg-src="img/edit.svg"></md-icon>
+    </md-button>
 
-      <md-button class="md-fab md-mini md-hue-3" aria-label=" "  ng-click="editTodo(todo)" ng-show="editing"
-      style="background:#008952;" type="submit" >
-          <md-icon md-svg-src="img/save.svg"></md-icon>
-        </md-button>
 
-    
-    <md-button class="md-fab md-mini md-hue-3" aria-label=" "  ng-click="deleteTodo(todo,$index)" ng-hide="editing"
-      style="background: rgb(246, 52, 3);"
-      >
-          <md-icon md-svg-src="img/delete.svg"></md-icon>
-        </md-button>
+    <md-button class="md-fab md-mini md-hue-3" aria-label=" " ng-click="editTodo(todo)" ng-show="editing" style="background:#008952;"
+      type="submit">
+      <md-icon md-svg-src="img/save.svg"></md-icon>
+    </md-button>
+
+
+    <md-button class="md-fab md-mini md-hue-3" aria-label=" " ng-click="deleteTodo(todo,$index)" ng-hide="editing"
+      style="background: rgb(246, 52, 3);">
+      <md-icon md-svg-src="img/delete.svg"></md-icon>
+    </md-button>
 
 
 

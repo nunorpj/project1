@@ -8,8 +8,6 @@ angular.module('myApp').service('todoService', function($http,httpWraperService)
     }
 
     this.addTodo=function(data){
-       data.date = new Date();
-
        return httpWraperService.privatePost('/api/todo/insert/',data);
 
     }
@@ -25,4 +23,6 @@ angular.module('myApp').service('todoService', function($http,httpWraperService)
        return httpWraperService.privatePut('/api/todo/edit/',data)
 
     }
+
+
 })

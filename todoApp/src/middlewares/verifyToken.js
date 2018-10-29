@@ -7,7 +7,6 @@ const verifyToken = module.exports = function (req, res, next) {
     //check if bearer id undefine
 
     if (typeof bearerHeader !== "undefined") {
-        console.log(req.headers);
         //split at the space
         const bearer = bearerHeader.split(" ");
         //get token from array

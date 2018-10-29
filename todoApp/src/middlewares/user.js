@@ -50,4 +50,5 @@ const User = require("../db/models/user");
 }
 
 
+
 module.exports.verifyUserData = verifyUserData;

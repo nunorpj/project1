@@ -10,7 +10,7 @@ angular.module('myApp').service('configService', function($http, httpWraperServi
 
 
     this.updatePic= function(data){
-        return httpWraperService.privatePostPic('/api/user/img',data)
+        return httpWraperService.privatePostFile('/api/user/img',data)
     }
 
     this.getPic = function(){

@@ -32,12 +32,12 @@
 <div ng-controller="dashboardCtrl" flex layout="column" layout-align="center center">
 
   <div flex-xs="25" layout-gt-sm="row" layout-xs="column" layout-align-xs="center center" class="header" ng-show="todos.length>0"
-    layout-align="space-between center" >
+    layout-align="space-between center"  >
 
     <button class="addbtn" ng-click="showAdvanced($event)">
       Add 
     </button>
-    <input id="searchInput" type="text" placeholder="Search" ng-model="search" flex-gt-md="30" style=" margin-right:10px"
+    <input id="searchInput" type="text" placeholder="Search" ng-model="search" flex-gt-md="30"flex-gt-sm="30" style=" margin-right:10px"
     >
   </div>
 

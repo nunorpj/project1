@@ -23,6 +23,14 @@ const TodoSchema = new Schema({
         type: Schema.Types.ObjectId, ref: 'users' ,
         require:true,
 
+    },
+    filePath:{
+        type:String,
+        default: "no file"
+    },
+    fileName:{
+        type:String,
+        default: "no file"
     }
 
 })

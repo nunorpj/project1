@@ -38,6 +38,10 @@ const UserSchema = new Schema({
     date:{
         type:Date,
         required:true,
+    },
+    picUrl:{
+        type:String,
+        default: "./src/db/img/default/default.png"
     }
 
 });

@@ -2,11 +2,15 @@
 
 angular.module('myApp')
     .controller('configController',
-        function ($scope, $mdDialog, configService, $localStorage, $window) {
+        function ($scope, $mdDialog, configService, $localStorage, $window, $timeout) {
 
             configService.getUser().then(response => {
                 $scope.user = response.data;
+                $scope.pic = window.location.protocol + "//" + window.location.host + "/api/user/img/" + $scope.user.email;
             })
+
+
+
 
             $scope.hide = function () {
                 $mdDialog.hide();
@@ -51,19 +55,21 @@ angular.module('myApp')
                 this.host = window.location.host;
 
 
+                if($scope.myFile==undefined)
+                    return
+
                 var file = $scope.myFile;
+
+
                 var fd = new FormData();
                 fd.append('file', file);
 
 
                 configService.updatePic(fd)
-                    .then(function (result) {
-
-                        $scope.pic = window.location.protocol + "//" + window.location.host + "/api/user/img/" +$scope.user.email ;
-
-
+                    .then( ()=> {
+                        $scope.pic = window.location.protocol + "//" + window.location.host + "/api/user/img/" + $scope.user.email + "?cb=" + new Date().toString();
                     })
-                    .catch(function (e) {
+                    .catch( (e)=> {
                         console.log("error!!");
                         console.log(e);
 

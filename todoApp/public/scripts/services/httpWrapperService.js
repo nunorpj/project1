@@ -16,7 +16,13 @@ angular.module('myApp').service('httpWraperService', function($http, $location) 
 
 
     this.setHeader = function(hdr) {
-        this.header= hdr;
+        this.header= {
+            transformRequest: angular.identity,
+            headers: {
+                'Content-Type': undefined,
+                'Authorization': hdr.headers.Authorization
+            }
+        }
     }
     
 
@@ -62,7 +68,7 @@ angular.module('myApp').service('httpWraperService', function($http, $location) 
     }
 
 
-    this.privatePostPic=function(path,data){
+    this.privatePostFile=function(path,data){
         if(!this.checkHeader()) return;
         let url = this.protocol + '//' + this.host + path;    
 
@@ -76,7 +82,6 @@ angular.module('myApp').service('httpWraperService', function($http, $location) 
         return $http.post(url,data,fileHeader)
 
         
-
     }
 
 

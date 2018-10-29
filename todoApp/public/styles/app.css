@@ -302,3 +302,23 @@ a:hover, a.active {
 .topTitle{
   color:black
 }
+
+
+
+.filemobile{
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+
+  max-width: 100px !important;
+}
+
+.todoconteinerMobile{
+  height: 160px !important;
+}
+
+.todoFootMob{
+  display: flex !important;
+  flex-direction: column !important;
+
+}

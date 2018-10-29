@@ -70,37 +70,69 @@ function editUser(req, res) {
 }
 
 
-function userImg(req, res) {    
+function getRandomInt(max) {
+    return Math.floor(Math.random() * Math.floor(max));
+  }
 
+
+
+function userImg(req, res) {    
 
 
     let file  =  fs.readFileSync(req.file.path);
 
+    
     let dir="./src/db/img/"+req.authData.playload
     
     if (!fs.existsSync(dir)){
         fs.mkdirSync(dir);
     }
+ 
+    sharp(file).resize(120, 120).toBuffer( (err, data, info)=>{
 
-    sharp(file).resize(100,100).toFile(dir + "/pic")
 
-    fs.unlink(req.file.path)
+        User.findById(req.authData.playload).then(user=>{
+            let oldimg = user.picUrl;
 
-    res.send("sucess")
+            let newName = dir+"/"+ getRandomInt(999999999999999)+".png"
+            fs.writeFileSync(newName, data, {encoding: 'base64', flag: 'w'})
+
+            if (fs.existsSync(newName)){
+                if(oldimg!="./src/db/img/default/default.png")
+                    if (fs.existsSync(oldimg))
+                        fs.unlink(oldimg)
+                user.picUrl=newName;
+                user.save();
+                
+
+            }
+
+        })
+
+
+
+        fs.unlink(req.file.path)
+        
+        res.send("sucess")
+    } );
+
+
 }
 
 
 function takeThatImg(req,res){
 
-    console.log("------------------------------------------------>>>>>>>>>>>>>>>>>>>>>>>>><")
 
-    console.log(req.params.email)
+    User.findOne({email: req.params.email}).then(user=>{
 
-    User.find({email: req.params.email}).then(user=>{
-        console.log(user._id)
+        res.download(user.picUrl)
+
+    }).catch(err=>{
+        res.download("./src/db/img/default/default.png")
+        console.log("default")
+
+
     })
-    let dir="./src/db/img/"+"5bd093c999b8b8309027815d"+ "/pic";
-    res.download(dir)
 
 
 }
@@ -109,3 +141,5 @@ module.exports.userImg = userImg;
 module.exports.getUser = getUser;
 module.exports.editUser = editUser;
 module.exports.takeThatImg= takeThatImg;
+
+

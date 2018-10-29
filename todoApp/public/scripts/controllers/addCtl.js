@@ -11,20 +11,28 @@ angular.module('myApp')
             $mdDialog.cancel();
         };
 
-        $scope.add = function (text, goalDate) {
+        $scope.add = function (text, goalDate, todoFile) {
             if (!text) {
                 return
             } else {
-                todoService.addTodo({
-                    text,
-                    goalDate
-                }).the(result => {
+                var fd = new FormData();
+                fd.append("text", text);
+                fd.append("goalDate", goalDate)
+                fd.append("date", new Date())
+
+                if (todoFile) {
+                    fd.append('file', todoFile);
+                }
+                todoService.addTodo(fd).then(result => {
+
                     if (result.data.todo)
                         $scope.todos.push(result.data.todo)
                     $mdDialog.hide();
+
                 }).catch(err => {
                     console.log(err)
                 })
+
             }
 
         };
