@@ -33,7 +33,16 @@
 
       <md-datepicker ng-show="editing" ng-model="todo.goalDate" md-placeholder="todo.goalDate"></md-datepicker>
 
-      <input type="file" ng-show="editing" file-model="todoFile" />
+      <input type="file" ng-show="editing && (todo.fileName=='no file') " file-model="todoFile" />
+
+      <div layout="row" ng-show="editing  && todo.fileName!=='no file'">
+
+        <span  ng-class="{filemobile:mobile}" ng-show="editing  && todo.fileName!=='no file'" ng-if="(todo.fileName!='no file')">{{todo.fileName}}</span>
+        <md-icon ng-show="editing  && todo.fileName!=='no file'" md-svg-src="img/cancel.svg" 
+        ng-click="deleteTodoFile(todo)" style="fill: red"
+        ></md-icon>
+      </div>
+
 
     </div>
 

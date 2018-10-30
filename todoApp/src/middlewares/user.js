@@ -4,6 +4,8 @@ const User = require("../db/models/user");
 
 
  function verifyUserData(req, res, next) {
+
+
     if (req.body.name) {
         if (req.body.name < 4) {
             res.status(400).send("Name it's to short")

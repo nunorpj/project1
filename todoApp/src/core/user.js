@@ -24,6 +24,7 @@ function getUser(req, res) {
 }
 
 function editUser(req, res) {
+
     User.findOne({
             _id: req.authData.playload
         })

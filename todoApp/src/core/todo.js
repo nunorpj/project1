@@ -16,6 +16,26 @@ function deleteTodo(req, res) {
 
 }
 
+
+function deleteFile(req, res) {
+    Todo.findById(req.params.id).then(todo => {
+        try {
+            if(todo.filePath != "no file")
+                fs.unlink(todo.filePath);
+        }catch(err){
+            console.log(err)
+        }
+        todo.filePath = "no file"
+        todo.fileName = "no file"
+        res.send("success")
+        todo.save()
+
+    }).catch(err => {
+        res.status(400).send("erro")
+    })
+}
+
+
 function editTodo(req, res) {
 
 
@@ -46,7 +66,7 @@ function editTodo(req, res) {
                 fs.writeFileSync(newFilePath, file)
 
                 fs.unlink(req.file.path)
-                if(oldFilePath!="no file")
+                if (oldFilePath != "no file")
                     fs.unlink(oldFilePath)
 
                 todo.filePath = newFilePath;
@@ -145,3 +165,4 @@ module.exports.editTodo = editTodo;
 module.exports.insertTodo = insertTodo;
 module.exports.getTodos = getTodos;
 module.exports.getFile = getFile;
+module.exports.deleteFile = deleteFile;

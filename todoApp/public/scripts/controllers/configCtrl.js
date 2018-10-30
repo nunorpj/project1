@@ -22,14 +22,21 @@ angular.module('myApp')
 
             $scope.save = function (user) {
 
-                console.log(user)
                 if (!user) {
                     console.log("no data")
                     return
 
                 } else {
 
-                    configService.updateUser(user).then(response => {
+                    let fd = new FormData()
+                    fd.append("name",user.name);
+                    fd.append("email",user.email);
+                    fd.append("password",user.password);
+                    fd.append("notifications",user.notifications);
+                    fd.append("sendingHour",user.sendingHour);
+
+
+                    configService.updateUser(fd).then(response => {
                         if (response.data.name) {
                             $localStorage.currentUser.user = response.data.name;
                             $scope.username = $localStorage.currentUser.user;

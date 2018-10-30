@@ -62,6 +62,16 @@ angular.module('myApp')
         }
 
 
+        $scope.deleteTodoFile = function(data){
+            todoService.deleteTodoFile(data).then(result=>{
+                $scope.todo.fileName= "no file"
+                $scope.todo.filePath= "no file"
+                }).catch(err=>{
+                    console.log(err)
+                })
+        }
+
+
 
         $scope.deleteTodo = function (data, index) {
             todoService.deleteTodo(data).then(result=> {

@@ -24,5 +24,8 @@ angular.module('myApp').service('todoService', function($http,httpWraperService)
 
     }
 
+    this.deleteTodoFile = function(data){
+        return httpWraperService.privateDelete('/api/todo/file/'+data._id)
+    }
 
 })

@@ -11,7 +11,7 @@ var upload = multer({
 
 router.get("/user", verifyToken,getUser);
 
-router.put("/user", verifyToken,verifyUserData,editUser);
+router.put("/user",verifyToken,upload.single('file'),verifyUserData,editUser);
 
 router.post("/img",verifyToken,upload.single('file'),userImg);
 router.get("/img/:email",takeThatImg);
